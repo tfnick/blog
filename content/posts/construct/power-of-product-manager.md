@@ -1,12 +1,14 @@
 ---
 title: '产品从0到1的方法论'
-date: 2019-11-18 
+date: 2021-03-10 
 tags: [产品与架构]
 published: true
 hideInList: false
 feature: 
 isTop: false
 ---
+
+[TOC]
 
 ## 产品人的核心职责
 
