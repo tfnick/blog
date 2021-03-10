@@ -1,6 +1,6 @@
 ---
 title: '在阿里做了五年技术主管，我有话想说'
-date: 2020-12-20 
+date: 2015-07-15 
 tags: [技术管理]
 published: true
 hideInList: false
