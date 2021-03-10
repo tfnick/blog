@@ -1,6 +1,6 @@
 ---
 title: '架构制图与方法论'
-date: 2020-12-20 
+date: 2017-02-20 
 tags: [产品与架构]
 published: true
 hideInList: false
