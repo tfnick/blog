@@ -44,6 +44,8 @@ rssLimit = 5
   weight="5"
 
 [params]
+
+  # toc on post
   toc = true
   # dir name of your blog content (default is `content/posts`)
   contentTypeName = "posts"
