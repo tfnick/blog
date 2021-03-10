@@ -4,7 +4,9 @@ date: 2020-03-14 12:41:27
 layout: 'posts'
 ---
 
-安心唠唠嗑，聊聊家常~
+撸过工程尸、架构尸、CTO的活，带过团队，金融行业创过业，体会过不易。北漂过，作为一个南方人最终还是回到南方，目前居住在深圳，在一家大型物流企业（匿了）做架构工作。工作方向偏技术管理，熟悉技术栈为Java，业余搞搞Golang+Flutter，擅长DevOps、分布式/高可用技术架构、微服务化技术架构。
+
+工作信条：去伪存精，化繁为简
 
 ### 我的朋友
 
@@ -36,6 +38,6 @@ Gridea：<https://gridea.dev/>
 ### 欢迎打赏
 
 <figure>
-    <img src="https://flynx.dev/images/wx.jpeg" alt="微信打赏" />
+    <img src="https://cdn.jsdelivr.net/gh/tfnick/blog/static/images/wx.jpeg" alt="微信打赏" />
     <figcaption>微信打赏</figcaption>
 </figure>

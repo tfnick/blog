@@ -46,7 +46,7 @@ rssLimit = 5
 [params]
 
   # toc on post
-  toc = true
+  # toc = true
   # dir name of your blog content (default is `content/posts`)
   contentTypeName = "posts"
   # "light" or "dark"
