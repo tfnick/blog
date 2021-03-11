@@ -32,7 +32,7 @@ content
         {{ end }}
     </div>
     <div class="post-content">
-        <a href="{{ .Permalink }}"><img loading="lazy" class="avatar" src=https://gravatar.loli.net/avatar/{{ md5 "自己的邮箱" }} ></a>
+        <a href="{{ .Permalink }}"><img loading="lazy" class="avatar" src=https://sdn.geekzu.org/avatar/{{ md5 "自己的邮箱" }} ></a>
         {{ .Content }}
     </div>
 {{ else }}
