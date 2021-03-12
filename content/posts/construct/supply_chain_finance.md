@@ -33,5 +33,5 @@ toc: true
 [1+L+N，供应链金融去核心企业化的创新模式](http://www.cindmin.com/news_20282.html)
 [基于区块链技术的供应链金融分析](http://www.lianmenhu.com/blockchain-19190-1)
 [旺链科技](http://www.vonechain.com/web/solution/page)
-![“爆雷”事件频发　供应链金融何去何从](https://kbase.10000link.com/newsdetail.aspx?doc=2019081390003)
-![供应链金融风险“套路深深”，本文带你破解风控之道](https://new.qq.com/omn/20200917/20200917A0DDJK00.html)
+[“爆雷”事件频发　供应链金融何去何从](https://kbase.10000link.com/newsdetail.aspx?doc=2019081390003)
+[供应链金融风险“套路深深”，本文带你破解风控之道](https://new.qq.com/omn/20200917/20200917A0DDJK00.html)
