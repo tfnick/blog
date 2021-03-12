@@ -35,3 +35,12 @@ toc: true
 [旺链科技](http://www.vonechain.com/web/solution/page)
 [“爆雷”事件频发　供应链金融何去何从](https://kbase.10000link.com/newsdetail.aspx?doc=2019081390003)
 [供应链金融风险“套路深深”，本文带你破解风控之道](https://new.qq.com/omn/20200917/20200917A0DDJK00.html)
+
+
+`区块链本质是一个去中心化的分布式账本，具备防篡改、不可抵赖的特点`
+`开发运行于区块链基础上的各类智能合约应用，比如Defi(分布式金融)是目前比较火的领域，数字资产上链，最大的挑战来自监管`
+
+[利用区块链技术提升传统金融的运行效率-基于强监管的联盟链](https://finance.sina.com.cn/money/bank/bank_hydt/2021-01-11/doc-iiznctkf1453100.shtml)
+[利用区块链技术开发基于代币的各类分布式金融服务“DEFI”-基于无监管的以太坊](https://www.bishijie.com/shendu/40464.html)
+[以太坊精选Defi应用](https://www.block123.com/zh-hans/feature/awesome-ethereum-defi-decentralized-finance-list/)
+[以太坊精选Defi应用-wyre跨境支付应用](https://www.block123.com/zh-hans/nav/999142480266.htm)
