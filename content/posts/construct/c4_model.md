@@ -103,6 +103,6 @@ C4模型作者也提供了一个checklist：https://c4model.com/assets/software-
 
 ## 参考
 
-> 本文图片均来自C4模型官网https://c4model.com/。
+> 本文图片均来自C4模型官网https://c4model.com/
 > C4模型在线画图工具：https://structurizr.com
 > 其他参考：https://www.infoq.com/articles/crafting-architectural-diagrams/
