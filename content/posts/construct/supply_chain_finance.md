@@ -104,6 +104,8 @@ toc: true
 
 [腾讯互联网巨头们的供应链金融布局](https://www.iyiou.com/analysis/20191219120577)
 
+[联易融招股书：毛利率高、研发占比低，近三年合计亏约30亿](https://baijiahao.baidu.com/s?id=1688414811157008899&wfr=spider&for=pc)
+
 [供应链金融模式详解与创新](https://baijiahao.baidu.com/s?id=1662039874232911230&wfr=spider&for=pc)
 
 [解读互联网+供应链金融的7种主流玩法](https://cloud.tencent.com/developer/article/1540382)
