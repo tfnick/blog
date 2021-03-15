@@ -102,6 +102,8 @@ toc: true
 
 [1+L+N，供应链金融去核心企业化的创新模式](http://www.cindmin.com/news_20282.html)
 
+[腾讯互联网巨头们的供应链金融布局](https://www.iyiou.com/analysis/20191219120577)
+
 [供应链金融模式详解与创新](https://baijiahao.baidu.com/s?id=1662039874232911230&wfr=spider&for=pc)
 
 [解读互联网+供应链金融的7种主流玩法](https://cloud.tencent.com/developer/article/1540382)
