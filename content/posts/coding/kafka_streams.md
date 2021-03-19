@@ -36,11 +36,11 @@ Kafka Stream的特点如下：
 
 一般流式计算会与批量计算相比较。在流式计算模型中，输入是持续的，可以认为在时间上是无界的，也就意味着，永远拿不到全量数据去做计算。同时，计算结果是持续输出的，也即计算结果在时间上也是无界的。流式计算一般对实时性要求较高，同时一般是先定义目标计算，然后数据到来之后将计算逻辑应用于数据。同时为了提高计算效率，往往尽可能采用增量计算代替全量计算。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing.png" style="zoom:50%;" />
 
 批量处理模型中，一般先有全量数据集，然后定义计算逻辑，并将计算应用于全量数据。特点是全量计算，并且计算结果一次性全量输出。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing-20210319225002166.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing-20210319225002166.png" style="zoom:50%;" />
 
 ### 为什么要有Kafka Stream
 
@@ -50,7 +50,7 @@ Kafka Stream的特点如下：
 
 第一，Spark和Storm都是流式处理**框架**，而Kafka Stream提供的是一个基于Kafka的流式处理**类库**。框架要求开发者按照特定的方式去开发逻辑部分，供框架调用。开发者很难了解框架的具体运行方式，从而使得调试成本高，并且使用受限。而Kafka Stream作为流式处理**类库**，直接提供具体的类给开发者调用，整个应用的运行方式主要由开发者控制，方便使用和调试。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/library.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/library.png" style="zoom:50%;" />
 
 第二，虽然Cloudera与Hortonworks方便了Storm和Spark的部署，但是这些框架的部署仍然相对复杂。而Kafka Stream作为类库，可以非常方便的嵌入应用程序中，它对应用的打包和部署基本没有任何要求。更为重要的是，Kafka Stream充分利用了[Kafka的分区机制](http://www.jasongj.com/2015/03/10/KafkaColumn1/#Topic-amp-Partition)和[Consumer的Rebalance机制](http://www.jasongj.com/2015/08/09/KafkaColumn4/#High-Level-Consumer-Rebalance)，使得Kafka Stream可以非常方便的水平扩展，并且各个实例可以使用不同的部署方式。具体来说，每个运行Kafka Stream的应用程序实例都包含了Kafka Consumer实例，多个同一应用的实例之间并行处理数据集。而不同实例之间的部署方式并不要求一致，比如部分实例可以运行在Web容器中，部分实例可运行在Docker或Kubernetes中。
 
@@ -68,7 +68,7 @@ Kafka Stream的特点如下：
 
 Kafka Stream的整体架构图如下所示。
 
-![](http://www.jasongj.com/img/kafka/KafkaColumn7/Kafka Stream Architecture.png)
+<img src="http://www.jasongj.com/img/kafka/KafkaColumn7/Kafka Stream Architecture.png" style="zoom: 33%;" />
 
 目前（Kafka 0.11.0.0）Kafka Stream的数据源只能如上图所示是Kafka。但是处理结果并不一定要如上图所示输出到Kafka。实际上KStream和Ktable的实例化都需要指定Topic。
 
@@ -146,19 +146,19 @@ Kafka Stream的并行模型中，最小粒度为Task，而每个Task包含一个
 
 
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/1%20thread.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/1%20thread.png" style="zoom:33%;" />
 
 为了充分利用多线程的优势，可以设置Kafka Stream的线程数。下图展示了线程数为2时的并行模型。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/2%20threads.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/2%20threads.png" style="zoom:33%;" />
 
 前文有提到，Kafka Stream可被嵌入任意Java应用（理论上基于JVM的应用都可以）中，下图展示了在同一台机器的不同进程中同时启动同一Kafka Stream应用时的并行模型。注意，这里要保证两个进程的`StreamsConfig.APPLICATION_ID_CONFIG`完全一样。因为Kafka Stream将APPLICATION_ID_CONFIG作为隐式启动的Consumer的Group ID。只有保证APPLICATION_ID_CONFIG相同，才能保证这两个进程的Consumer属于同一个Group，从而可以通过Consumer Rebalance机制拿到互补的数据集。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/2%20instances.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/2%20instances.png" style="zoom:33%;" />
 
 既然实现了多进程部署，可以以同样的方式实现多机器部署。该部署方式也要求所有进程的APPLICATION_ID_CONFIG完全一样。从图上也可以看到，每个实例中的线程数并不要求一样。但是无论如何部署，Task总数总会保证一致。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/2%20servers.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/2%20servers.png" style="zoom:33%;" />
 
 注意：Kafka Stream的并行模型，非常依赖于《[Kafka设计解析（一）- Kafka背景及架构介绍](http://www.jasongj.com/2015/03/10/KafkaColumn1)》一文中介绍的[Kafka分区机制](http://www.jasongj.com/2015/03/10/KafkaColumn1/#Topic-amp-Partition)和《[Kafka设计解析（四）- Kafka Consumer设计解析](http://www.jasongj.com/2015/08/09/KafkaColumn4/)》中介绍的[Consumer的Rebalance机制](http://www.jasongj.com/2015/08/09/KafkaColumn4/#High-Level-Consumer-Rebalance)。强烈建议不太熟悉这两种机制的朋友，先行阅读这两篇文章。
 
@@ -180,7 +180,7 @@ KStream是一个数据流，可以认为所有记录都通过Insert only的方�
 
 以下图为例，假设有一个KStream和KTable，基于同一个Topic创建，并且该Topic中包含如下图所示5条数据。此时遍历KStream将得到与Topic内数据完全一样的所有5条数据，且顺序不变。而此时遍历KTable时，因为这5条记录中有3个不同的Key，所以将得到3条记录，每个Key对应最新的值，并且这三条数据之间的顺序与原来在Topic中的顺序保持一致。这一点与Kafka的日志compact相同。
 
-![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/ktable_kstream.png)
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/ktable_kstream.png" style="zoom:33%;" />
 
 此时如果对该KStream和KTable分别基于key做Group，对Value进行Sum，得到的结果将会不同。对KStream的计算结果是`<Jack，4>`，`<Lily，7>`，`<Mike，4>`。而对Ktable的计算结果是`<Mike，4>`，`<Jack，3>`，`<Lily，5>`。
 
@@ -218,11 +218,11 @@ Kafka Stream支持的窗口如下。
 
 1. `Hopping Time Window` 该窗口定义如下图所示。它有两个属性，一个是Window size，一个是Advance interval。Window size指定了窗口的大小，也即每次计算的数据集的大小。而Advance interval定义输出的时间间隔。一个典型的应用场景是，每隔5秒钟输出一次过去1个小时内网站的PV或者UV。
 
-   ![](http://www.jasongj.com/img/kafka/KafkaColumn7/Hopping Time Window.gif)
+   <img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/Hopping%20Time%20Window-20210319230702710.gif" style="zoom:50%;" />
 
 2. `Tumbling Time Window`该窗口定义如下图所示。可以认为它是Hopping Time Window的一种特例，也即Window size和Advance interval相等。它的特点是各个Window之间完全不相交。
 
-   ![](https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/Tumbling%20Time%20Window.gif)
+   <img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/Tumbling%20Time%20Window.gif" style="zoom:50%;" />
 
 3. `Sliding Window`该窗口只用于2个KStream进行Join计算时。该窗口的大小定义了Join两侧KStream的数据记录被认为在同一个窗口的最大时间差。假设该窗口的大小为5秒，则参与Join的2个KStream中，记录时间差小于5的记录被认为在同一个窗口中，可以进行Join计算。
 
@@ -326,8 +326,6 @@ orderUserStrea
 ````
 
 从上述代码可见，through时需要指定Key的序列化器，Value的序列化器，以及分区方式和结果集所在的Topic。这里要注意，该Topic（orderuser-repartition-by-item）的Partition数必须与itemTable对应Topic的Partition数相同，并且through使用的分区方法必须与iteamTable对应Topic的分区方式一样。经过这种`through`操作，orderUserStream与itemTable满足了Join条件，可直接进行Join。
-
-
 
 ## 总结
 
