@@ -11,6 +11,23 @@ toc: true
 
 > 最终：使用kafka + kafka streams(kstreams api + ktable api) 轻量级解决方案，较好的满足了实时性、扩展性、容错的要求。
 
+
+
+**选择kafka streams的几点考量**：
+
+- 与Spark和Storm等流式处理框架相比，kafka stream提供的是一个基于kafka的流式处理类库。且kafka stream作为流式处理类库，直接提供具体的类和接口给开发者，整个程序处理逻辑全都由开发者自己控制，方便开发和调试。
+
+- 由于kafka stream是作为类库嵌入程序中，使得kafka stream打包部署非常方便。并且kafka stream利用了kafka 的分区机制和consumer的rebalance机制，使得kafka stream程序可以非常方便的进行水平扩展，并且可以在线动态调整并行度。
+
+  `注：kafka streams的并行度基于topology级别，而Flink可以到算子级别`
+
+- Kafka Stream的并行模型中，最小粒度为Task，而每个Task包含一个特定子Topology的所有Processor，使得所有处理逻辑都在同一线程内完成。这一特点跟Storm的Topology完全不一样。Storm的Topology的每一个Task只包含一个Spout或Bolt的实例。因此Storm的一个Topology内的不同Task之间需要通过网络通信传递数据，而Kafka Stream的Task包含了完整的子Topology，所以Task之间不需要传递数据，也就不需要网络通信。这一点降低了系统复杂度，也提高了处理效率。
+- 
+
+
+
+
+
 `以下是网络引用文章，作为选型备忘资料`
 
 本文介绍了Kafka Stream的背景，如Kafka Stream是什么，什么是流式计算，以及为什么要有Kafka Stream。接着介绍了Kafka Stream的整体架构，并行模型，状态存储，以及主要的两种数据集KStream和KTable。并且分析了Kafka Stream如何解决流式系统中的关键问题，如时间定义，窗口操作，Join操作，聚合操作，以及如何处理乱序和提供容错能力。最后结合示例讲解了如何使用Kafka Stream。
@@ -336,6 +353,19 @@ orderUserStrea
 - state store为状态计算提供了可能
 - 基于offset的计算进度管理以及基于state store的中间状态管理为发生Consumer rebalance或Failover时从断点处继续处理提供了可能，并为系统容错性提供了保障
 - KTable的引入，使得聚合计算拥用了处理乱序问题的能力
+
+
+
+## FAQ
+
+1. **Task（拓扑）和线程之间的关系**
+
+- kafka stream通过`props.put(StreamsConfig.NUM_STREAM_THREADS_CONFIG,2);`属性可以设置并行的线程数.
+- Task的数量由Topic的分区数决定,取监听的topic中最大的分区数作为Task的数量,Task和Thread之间的分配由线程数决定.若有4个Task,但是只有一个Thread,则4个Task位于同一线程中串行.若有4个Task,和4个Thread,则每个Task独享一个线程,并行处理.若Task数大于Thread数,则有kafka stream自行做分配.若Task数小于线程数,则会出现某些线程不能执行Task的情况.
+
+2. **当某一实例处理数据时宕机了,数据是否会丢失**
+
+分区与任务的分配永远不改变,当应用实例执行任务失败时,则其被分配的任务将自动在其他实例中被创建,并从相同的流分区重新消费.
 
 ## 参考文章
 
