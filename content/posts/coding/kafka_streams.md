@@ -22,13 +22,10 @@ toc: true
   `注：kafka streams的并行度基于topology级别，而Flink可以到算子级别`
 
 - Kafka Stream的并行模型中，最小粒度为Task，而每个Task包含一个特定子Topology的所有Processor，使得所有处理逻辑都在同一线程内完成。这一特点跟Storm的Topology完全不一样。Storm的Topology的每一个Task只包含一个Spout或Bolt的实例。因此Storm的一个Topology内的不同Task之间需要通过网络通信传递数据，而Kafka Stream的Task包含了完整的子Topology，所以Task之间不需要传递数据，也就不需要网络通信。这一点降低了系统复杂度，也提高了处理效率。
-- 
 
 
 
-
-
-`以下是网络引用文章，作为选型备忘资料`
+`以下是网络引用文章，作为选型备忘参考资料`
 
 本文介绍了Kafka Stream的背景，如Kafka Stream是什么，什么是流式计算，以及为什么要有Kafka Stream。接着介绍了Kafka Stream的整体架构，并行模型，状态存储，以及主要的两种数据集KStream和KTable。并且分析了Kafka Stream如何解决流式系统中的关键问题，如时间定义，窗口操作，Join操作，聚合操作，以及如何处理乱序和提供容错能力。最后结合示例讲解了如何使用Kafka Stream。
 
