@@ -39,6 +39,10 @@ Kapacitor处理一般分两种，一种是 stream，一种是 batch。stream 方
 
 新版本的具体功能还在体验中，有不少惊喜。
 
+
+
+![](https://www.influxdata.com/wp-content/uploads/APM-Diagram-2.png)
+
 ## 优势
 
 - 基于Go开发，安装部署方便，性能优越
