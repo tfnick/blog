@@ -7,7 +7,7 @@ toc: true
 
 ## 概念
 
-记得17年基于InfluxDb以及所谓的`TICK`监控解决方案，实现了公司近实时的业务监控，对核心业务指标进行监控预警，方便运营人员及时调整运营策略。
+记得2017年基于InfluxDb以及所谓的`TICK`监控解决方案，实现了公司近实时的业务监控，对核心业务指标进行监控预警，方便运营人员及时调整运营策略。
 
 市面上，时序数据库的选型不少，比如OpenTSDB,Postgre(没错，它也可以变身时序数据库)-很多做模型的公司会选型postgre做模型样本数据的存储。
 
@@ -15,7 +15,7 @@ toc: true
 
 ### Telegraf
 
-是一个数据收集和入库的工具。提供了很多 input 和 output 插件，比如收集本地的 cpu、load、网络流量等数据，然后写入 InfluxDB 或者 Kafka 等。Java里有类似的组件，比如Filebeat Flume。
+是一个数据收集和入库的工具。提供了很多 input 和 output 插件，比如收集本地的 cpu、load、网络流量等数据，然后写入 InfluxDB 或者 Kafka 等。Java里有类似的组件，比如Filebeat，Flume。
 
 ### InfluxDB
 
@@ -23,7 +23,7 @@ toc: true
 
 ### Chronograf
 
-绘图工具，有点是绑定了 Kapacitor，缺点是难用。
+绘图工具，优点是默认绑定了 Kapacitor，缺点是难用。
 
 ### Kapacitor
 
