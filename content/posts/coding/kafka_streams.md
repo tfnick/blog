@@ -25,7 +25,15 @@ toc: true
 
 
 
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/webp.jpg" style="zoom:40%;" />
+
+> - Partition的数据会分发到不同的Task上，Task主要是用来做流式的并行处理
+> - 每个Task都会有自己的state store去记录状态
+> - 每个Thread里会有多个Task
+
 `以下是网络引用文章，作为选型备忘参考资料`
+
+
 
 本文介绍了Kafka Stream的背景，如Kafka Stream是什么，什么是流式计算，以及为什么要有Kafka Stream。接着介绍了Kafka Stream的整体架构，并行模型，状态存储，以及主要的两种数据集KStream和KTable。并且分析了Kafka Stream如何解决流式系统中的关键问题，如时间定义，窗口操作，Join操作，聚合操作，以及如何处理乱序和提供容错能力。最后结合示例讲解了如何使用Kafka Stream。
 
@@ -50,11 +58,11 @@ Kafka Stream的特点如下：
 
 一般流式计算会与批量计算相比较。在流式计算模型中，输入是持续的，可以认为在时间上是无界的，也就意味着，永远拿不到全量数据去做计算。同时，计算结果是持续输出的，也即计算结果在时间上也是无界的。流式计算一般对实时性要求较高，同时一般是先定义目标计算，然后数据到来之后将计算逻辑应用于数据。同时为了提高计算效率，往往尽可能采用增量计算代替全量计算。
 
-<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing.png" style="zoom:30%;" />
 
 批量处理模型中，一般先有全量数据集，然后定义计算逻辑，并将计算应用于全量数据。特点是全量计算，并且计算结果一次性全量输出。
 
-<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing-20210319225002166.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/batch_procissing-20210319225002166.png" style="zoom:30%;" />
 
 ### 为什么要有Kafka Stream
 
@@ -64,7 +72,7 @@ Kafka Stream的特点如下：
 
 第一，Spark和Storm都是流式处理**框架**，而Kafka Stream提供的是一个基于Kafka的流式处理**类库**。框架要求开发者按照特定的方式去开发逻辑部分，供框架调用。开发者很难了解框架的具体运行方式，从而使得调试成本高，并且使用受限。而Kafka Stream作为流式处理**类库**，直接提供具体的类给开发者调用，整个应用的运行方式主要由开发者控制，方便使用和调试。
 
-<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/library.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/tfnick/pic1@master/img/library.png" style="zoom:30%;" />
 
 第二，虽然Cloudera与Hortonworks方便了Storm和Spark的部署，但是这些框架的部署仍然相对复杂。而Kafka Stream作为类库，可以非常方便的嵌入应用程序中，它对应用的打包和部署基本没有任何要求。更为重要的是，Kafka Stream充分利用了[Kafka的分区机制](http://www.jasongj.com/2015/03/10/KafkaColumn1/#Topic-amp-Partition)和[Consumer的Rebalance机制](http://www.jasongj.com/2015/08/09/KafkaColumn4/#High-Level-Consumer-Rebalance)，使得Kafka Stream可以非常方便的水平扩展，并且各个实例可以使用不同的部署方式。具体来说，每个运行Kafka Stream的应用程序实例都包含了Kafka Consumer实例，多个同一应用的实例之间并行处理数据集。而不同实例之间的部署方式并不要求一致，比如部分实例可以运行在Web容器中，部分实例可运行在Docker或Kubernetes中。
 
