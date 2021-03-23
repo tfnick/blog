@@ -13,8 +13,8 @@ toc: true
 日期： 2021-03-23
 操作系统： Manjaro
 go版本： go1.16.2 linux/amd64
-GoLand： 商业开发IDE 
-Golite:  开源开发IDE 
+GoLand： 商业IDE 
+Golite:  开源IDE 
 ```
 
 ## 安装过程
@@ -39,7 +39,10 @@ export GOROOT=/usr/lib/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-export GO111MODULE=auto
+# set proxy
+export GOPROXY=https://goproxy.io,direct
+export GOSUMDB=off
+export GO111MODULE=on
 ```
 
 使生效
@@ -53,6 +56,15 @@ source ~/.profile
 ```shell
 go env
 ```
+
+### 配置Goland(可选，推荐)
+
+`File` -> `Setting` -> `Tools` -> `File Watchers`,添加以下三个工具项：
+
+- **go fmt**,格式化
+- **goimports**，自动引入
+- **golangci-lint**，Go静态代码检查工具
+
 
 ### 安装delve(可选)
 
