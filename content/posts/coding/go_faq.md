@@ -92,7 +92,7 @@ func main()  {
 
 #### 对象与方法绑定
 
-```
+```go
 package main
 
 import "fmt"
