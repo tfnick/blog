@@ -10,7 +10,7 @@ toc: true
 
 [go语言特性快速上手](https://gitee.com/goflyfox/gostudy/tree/master/doc)
 
-![Go代码在线运行](https://play.golang.org/)
+[Go代码在线运行](https://play.golang.org/)
 
 ## FAQ （类比java）
 
