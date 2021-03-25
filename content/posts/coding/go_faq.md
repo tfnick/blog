@@ -451,12 +451,122 @@ func flatMapOnPoint(str *string) []string {
 
 ### interface
 
+```go
+package main
+
+import "fmt"
+import "math"
+
+// 这里是一个几何体的基本接口。
+type geometry interface {
+	area() float64
+	perim() float64
+}
+
+// 在我们的例子中，我们将让 rect 和 circle 实现这个接口
+type rect struct {
+	width, height float64
+}
+type circle struct {
+	radius float64
+}
+
+// 要在 Go 中实现一个接口，我们只需要实现接口中的所有方法。
+// 这里我们让 rect 实现了 geometry 接口。
+func (r rect) area() float64 {
+	return r.width * r.height
+}
+func (r rect) perim() float64 {
+	return 2*r.width + 2*r.height
+}
+
+// circle 的实现。
+func (c circle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
+func (c circle) perim() float64 {
+	return 2 * math.Pi * c.radius
+}
+
+// 如果一个变量的是接口类型，那么我们可以调用这个被命名的接口中的方法。
+// 这里有一个一通用的 measure 函数，利用这个特性，它可以用在任何 geometry 上。
+func measure(g geometry) {
+	fmt.Println(g)
+	fmt.Println(g.area())
+	fmt.Println(g.perim())
+}
+func main() {
+	r := rect{width: 3, height: 4}
+	c := circle{radius: 5}
+	// 结构体类型 circle 和 rect 都实现了 geometry接口，
+	// 所以我们可以使用它们的实例作为 measure 的参数。
+	measure(r)
+	measure(c)
+}
+
+```
+
+`空接口(interface{})`不包含任何的方法，正因为如此，所有的类型都实现了空接口，因此空接口可以存储任意类型，包括基本类型、结构体、甚至指针。
+
+```go
+
+package main
+
+import "fmt"
+
+var v1 interface{} = 1     // 将int类型赋值给interface{}
+var v2 interface{} = "abc" // 将string类型赋值给interface{}
+var v3 interface{} = &v2   // 将*interface{}类型赋值给interface{}
+var v4 interface{} = struct{ X int }{1} //将struct类型赋值给interface{}
+var v5 interface{} = &struct{ X int }{1} //将&struct类型赋值给interface{}
+
+//interface{}作为参数,...表示动态个数参数
+func MyPrint(args ...interface{}){
+	fmt.Println(args)
+}
+
+func main(){
+	MyPrint("interface{} as function's parameter")
+}
+
+//备注：interface表示一组方法的集合
+    
+```
 
 ### 注解，泛型
 
 注解不支持，泛型有计划支持（目前还不支持）
 
 ### nil
+
+什么是nil,根据官方定义，nil是预定义标识，代表了指针`pointer`、`通道channel`、`函数func`、`接口interface`、`map`、`切片slice`类型变量的零值。
+
+
+```go
+bool    -> false
+numbers -> 0
+string  -> ""
+
+pointers -> nil
+slices -> nil
+maps -> nil
+channels -> nil
+functions -> nil
+interfaces -> nil
+
+```
+
+> 注意：struct类型零值不是nil，而是各字段值为对应类型的零值。且不能将struct类型和nil进行等值判断，语法校验不通过。
+
+针对数组，稍微有点复杂：
+
+```go
+var t []string   // t -> nil
+
+tt := []string{} // tt -> [] 空数组
+```
+
+> Golang官方建议，当声明空数组时，推荐使用第一种方法；但万事不是绝对的，当在Json编码时，推荐的是后两种方式，因为一个nil空数组会被编码为null，但非nil空数组会被编码为JSON array []，这样方便前端解析。
 
 ### 协程
 
