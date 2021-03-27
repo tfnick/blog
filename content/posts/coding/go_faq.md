@@ -9,9 +9,11 @@ toc: true
 
 ## 资料
 
-[go语言特性快速上手](https://gitee.com/goflyfox/gostudy/tree/master/doc)
+[Go语言特性快速上手](https://gitee.com/goflyfox/gostudy/tree/master/doc)
 
 [Go代码在线运行](https://play.golang.org/)
+
+[Go语言设计模式](https://github.com/senghoo/golang-design-pattern)
 
 ## FAQ （类比java）
 
