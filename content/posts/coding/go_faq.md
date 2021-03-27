@@ -15,6 +15,8 @@ toc: true
 
 [Go语言设计模式](https://github.com/senghoo/golang-design-pattern)
 
+[通用设计模式电子版](https://refactoringguru.cn/design-patterns/adapter)
+
 ## FAQ （类比java）
 
 ### 程序启动过程分析
