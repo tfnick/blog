@@ -42,4 +42,6 @@ AIDL属于Android的IPC机制，常用于跨进程通信，主要实现原理基
 
 ## 参考
 
-[](https://blog.csdn.net/zhangyongfeiyong/article/details/77869590)
+[stub模式](https://blog.csdn.net/zhangyongfeiyong/article/details/77869590)
+
+[一个stub模式例子](https://blog.csdn.net/u014002667/article/details/78989882)
