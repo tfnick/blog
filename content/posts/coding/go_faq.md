@@ -11,7 +11,7 @@ toc: true
 
 [Go语言特性快速上手](https://gitee.com/goflyfox/gostudy/tree/master/doc)
 
-[Go代码在线运行](https://play.golang.org/)
+[Go代码在线运行](https://c.runoob.com/compile/21)
 
 [Go语言设计模式](https://github.com/senghoo/golang-design-pattern)
 
@@ -578,6 +578,574 @@ tt := []string{} // tt -> [] 空数组
 
 > Golang官方建议，当声明空数组时，推荐使用第一种方法；但万事不是绝对的，当在Json编码时，推荐的是后两种方式，因为一个nil空数组会被编码为null，但非nil空数组会被编码为JSON array []，这样方便前端解析。
 
-### 协程
+### 
 
 ### 异常处理
+
+
+
+#### error是一个接口
+
+error类型是一个接口类型，这是它的定义：
+
+```go
+type error interface {
+    Error() string
+}
+```
+
+#### 返回error的函数定义
+
+```go
+package main
+
+import "errors"
+import "fmt"
+
+// 按照惯例，错误通常是最后一个返回值并且是 error 类型，一个内建的接口。
+func f1(arg int) (int, error) {
+	// errors.New 构造一个使用给定的错误信息的基本error 值。
+	if arg == 42 {
+		return -1, errors.New("can't work with 42")
+	}
+	// 返回错误值为 nil 代表没有错误。
+	return arg + 3, nil
+}
+
+func main() {
+	//如果不关心返回的error，则用_表示
+	x, _ := f1(1)
+	fmt.Println(x)
+}
+```
+
+#### defer函数
+
+defer函数一般定义在某个方法中，表示当前defer所在的函数结束时必然被执行的操作；有点类似java中的finally的功能。
+
+
+
+```go
+package main
+
+import "fmt"
+import "os"
+
+func main() {
+	// 假设我们想要创建一个文件，向它进行写操作，然后在结束时关闭它。
+	// 这里展示了如何通过 defer 来做到这一切。
+	f := createFile("D:/defer.txt") // f := createFile("/tmp/defer.txt")
+
+    // 故此处defer只是声明，它对应的函数closeFile(f) 真正执行是在 (main)函数最后一个操作writeFile(f)之后。
+	defer closeFile(f)
+	writeFile(f)
+}
+func createFile(p string) *os.File {
+	fmt.Println("creating")
+	f, err := os.Create(p)
+	if err != nil {
+		panic(err)
+	}
+	return f
+}
+func writeFile(f *os.File) {
+	fmt.Println("writing")
+	fmt.Fprintln(f, "data")
+}
+func closeFile(f *os.File) {
+	fmt.Println("closing")
+	f.Close()
+}
+```
+
+
+
+#### 抛出异常
+
+
+
+Go的类型系统会在编译时捕获很多错误，但有些错误只能在运行时检查，如数组访问越界、空指针引用等。这些运行时错误会引起painc异常。
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// 我们将在这个网站中使用 panic 来检查预期外的错误。这个是唯一一个为 panic 准备的例子。
+	panic("一个异常")
+
+	// panic 的一个基本用法就是在一个函数返回了错误值但是我们并不知道（或者不想）处理时终止运行。
+	// 这里是一个在创建一个新文件时返回异常错误时的panic 用法。
+	fmt.Println("继续")
+	_, err := os.Create("/tmp/file")
+	if err != nil {
+		panic(err)
+	}
+	// 运行程序将会引起 panic，输出一个错误消息和 Go 运行时栈信息，并且返回一个非零的状态码。
+}
+```
+
+
+
+#### 捕获异常
+
+
+
+通常来说，不应该对panic异常做任何处理，但有时，也许我们可以从异常中恢复，至少我们可以在程序崩溃前，做一些操作。举个例子，当web服务器遇到不可预料的严重问题时，在崩溃前应该将所有的连接关闭；如果不做任何处理，会使得客户端一直处于等待状态。如果web服务器还在开发阶段，服务器甚至可以将异常信息反馈到客户端，帮助调试。
+
+如果在deferred函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。
+
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 这里我们对异常进行了捕获
+	defer func() {
+		if p := recover(); p != nil {
+			err := fmt.Errorf("internal error: %v", p)
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+	}()
+
+	// 我们将在这个网站中使用 panic 来检查预期外的错误。这个是唯一一个为 panic 准备的例子。
+	panic("一个异常")
+
+}
+```
+
+
+
+### 协程
+
+#### 协程（Goroutines）
+
+在Go语言中，每一个并发的执行单元叫作一个goroutine。，我们只需要通过 go 关键字来开启 goroutine 即可。goroutine 是轻量级线程，goroutine 的调度是由 Golang 运行时进行管理的。
+
+goroutine 语法格式：
+
+```
+go func( 形参 ){
+	//这里定义函数操作内容
+}(实参)
+```
+
+
+
+```go
+package main
+
+import "fmt"
+
+func f(from string) {
+	for i := 0; i < 3; i++ {
+		fmt.Println(from, ":", i)
+	}
+}
+func main() {
+	// 假设我们有一个函数叫做 f(s)。
+	// 我们使用一般的方式调并同时运行。
+	f("direct")
+	// 使用 go f(s) 在一个 Go 协程中调用这个函数。
+	// 这个新的 Go 协程将会并行的执行这个函数调用。
+	go f("goroutine")
+	// 你也可以为匿名函数启动一个 Go 协程。
+	go func(msg string) {
+		fmt.Println(msg)
+	}("going")
+
+	// 现在这两个 Go 协程在独立的 Go 协程中异步的运行，所以我们需要等它们执行结束。
+	// 这里的 Scanln 代码需要我们在程序退出前按下任意键结束。
+	var input string
+	fmt.Scanln(&input)
+	fmt.Println("done")
+	// 当我们运行这个程序时，将首先看到阻塞式调用的输出，然后是两个 Go 协程的交替输出。
+	// 这种交替的情况表示 Go 运行时是以异步的方式运行协程的。
+}
+```
+
+
+
+#### 通道（channel）
+
+如果说goroutine是Go语言程序的并发体的话，那么channels则是它们之间的通信机制。通道（channel）是用来传递数据的一个数据结构。
+
+通道可用于两个 goroutine 之间通过传递一个指定类型的值来同步运行和通讯。操作符 `<-` 用于指定通道的方向，发送或接收。如果未指定方向，则为双向通道。
+
+```
+ch <- v    // 把 v 发送到通道 ch
+v := <-ch  // 从 ch 接收数据
+           // 并把值赋给 v
+```
+
+声明一个通道很简单，我们使用chan关键字即可，通道在使用前必须先创建：
+
+```
+ch := make(chan int)
+
+```
+
+示例：
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// 通道 是连接多个 Go 协程的管道。
+// 你可以从一个 Go 协程将值发送到通道，然后在别的 Go 协程中接收。
+func main() {
+	// 使用 make(chan val-type) 创建一个新的通道。
+	// 通道类型就是他们需要传递值的类型。
+	messages := make(chan string)
+	// 使用 channel <- 语法 发送 一个新的值到通道中。
+	// 这里我们在一个新的 Go 协程中发送 "ping" 到上面创建的messages 通道中。
+	go func() {
+		messages <- "ping"
+	}()
+	// 使用 <-channel 语法从通道中 接收 一个值。
+	// 这里将接收我们在上面发送的 "ping" 消息并打印出来。
+	msg := <-messages
+	fmt.Println(msg)
+	// 我们运行程序时，通过通道，消息 "ping" 成功的从一个 Go 协程传到另一个中。
+	// 默认发送和接收操作是阻塞的，直到发送方和接收方都准备完毕。
+	// 这个特性允许我们，不使用任何其它的同步操作，来在程序结尾等待消息 "ping"。
+}
+```
+
+
+
+#### 通道缓冲区
+
+通道可以设置缓冲区，通过 make 的第二个参数指定缓冲区大小：
+
+```go
+ch := make(chan int, 100)
+```
+
+带缓冲区的通道允许发送端的数据发送和接收端的数据获取处于异步状态，就是说发送端发送的数据可以放在缓冲区里面，可以等待接收端去获取数据，而不是立刻需要接收端去获取数据。
+
+不过由于缓冲区的大小是有限的，所以还是必须有接收端来接收数据的，否则缓冲区一满，数据发送端就无法再发送数据了。
+
+**注意**：如果通道不带缓冲，发送方会阻塞直到接收方从通道中接收了值。如果通道带缓冲，发送方则会阻塞直到发送的值被拷贝到缓冲区内；如果缓冲区已满，则意味着需要等待直到某个接收方获取到一个值。接收方在有值可以接收之前会一直阻塞。
+
+示例：
+
+```go
+package main
+
+import "fmt"
+
+// 默认通道是 无缓冲 的，这意味着只有在对应的接收（<- chan）通道准备好接收时，才允许进行发送（chan <-）。
+// 可缓存通道允许在没有对应接收方的情况下，缓存限定数量的值。
+func main() {
+	// 这里我们 make 了一个通道，最多允许缓存 2 个值。
+	messages := make(chan string, 2)
+	// 因为这个通道是有缓冲区的，即使没有一个对应的并发接收方，我们仍然可以发送这些值。
+	messages <- "buffered"
+	messages <- "channel"
+	// 然后我们可以像前面一样接收这两个值。
+	fmt.Println(<-messages)
+	fmt.Println(<-messages)
+}
+```
+
+
+
+#### 同步实现
+
+我们可以通过channel实现同步，如下：
+
+##### 方案1
+
+```go
+package main
+
+import "fmt"
+import "time"
+
+// 我们可以使用通道来同步 Go 协程间的执行状态。
+// 这里是一个使用阻塞的接受方式来等待一个 Go 协程的运行结束。
+func worker(done chan bool) {
+	// 这是一个我们将要在 Go 协程中运行的函数。
+	// done 通道将被用于通知其他 Go 协程这个函数已经工作完毕。
+	fmt.Print("working...")
+	time.Sleep(time.Second)
+	fmt.Println("done")
+	// 发送一个值来通知我们已经完工啦。
+	done <- true
+}
+func main() {
+	// 运行一个 worker Go协程，并给予用于通知的通道。
+	done := make(chan bool, 1)
+	go worker(done)
+	// 程序将在接收到通道中 worker 发出的通知前一直阻塞。
+	<-done
+	// 如果你把 <- done 这行代码从程序中移除，程序甚至会在 worker还没开始运行时就结束了。
+}
+```
+
+
+
+##### 方案2
+
+`sync.WaitGroup`是官方提供的一个包，用于控制协程同步。通常场景，我们需要等待一组协程都执行完成以后，做后面的处理。如果不使用这个包的话，可能会像下面这样去实现
+
+
+
+```go
+package main
+
+import "fmt"
+
+const SIZE = 3
+
+func main() {
+	fmt.Println("start")
+    ch := make(chan int, 3)
+    for i := 0;i<SIZE;i++ {
+        go func(i int) {
+            ch <- i
+        }(i)
+    }
+    for i := 0;i<SIZE;i++ {
+        fmt.Println(<- ch)
+    }
+	fmt.Println("end")
+}
+```
+
+等同于:
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+	fmt.Println("start")
+    wg := sync.WaitGroup{}
+    for i := 0;i<3;i++ {
+        wg.Add(1)
+        go func(i int) {
+            fmt.Printf("hello %d \n", i)
+            wg.Done()
+        }(i)
+    }
+    wg.Wait()
+	fmt.Println("done")
+}
+```
+
+
+
+#### 通道方向示例
+
+```go
+package main
+
+import "fmt"
+
+// 当使用通道作为函数的参数时，你可以指定这个通道是不是只用来发送或者接收值。
+// 这个特性提升了程序的类型安全性。
+func ping(pings chan <- string, msg string) {
+	// ping 函数定义了一个只允许发送数据的通道。
+	// 尝试使用这个通道来接收数据将会得到一个编译时错误。
+	pings <- msg
+}
+func pong(pings <-chan string, pongs chan <- string) {
+	// pong 函数允许通道（pings）来接收数据，另一通道（pongs）来发送数据。
+	msg := <-pings
+	pongs <- msg
+}
+func main() {
+	pings := make(chan string, 1)
+	pongs := make(chan string, 1)
+	ping(pings, "passed message")
+	pong(pings, pongs)
+	fmt.Println(<-pongs)
+}
+```
+
+
+
+#### 遍历通道与关闭通道
+
+Go 通过 range 关键字来实现遍历读取到的数据，类似于与数组或切片。格式如下：
+
+```go
+v, ok := <-ch
+```
+
+如果通道接收不到数据后 ok 就为 false，这时通道就可以使用 **close()** 函数来关闭。
+
+
+
+#### 通道选择器（select）
+
+````go
+select {
+case <-ch1:
+    // ...
+case x := <-ch2:
+    // ...use x...
+case ch3 <- y:
+    // ...
+default:
+    // ...
+}
+````
+
+
+select语句的一般形式。和switch语句稍微有点相似，也会有几个case和最后的default选择支。每一个case代表一个通信操作(在某个channel上进行发送或者接收)并且会包含一些语句组成的一个语句块。一个接收表达式可能只包含接收表达式自身(译注：不把接收到的值赋值给变量什么的)，就像上面的第一个case，或者包含在一个简短的变量声明中，像第二个case里一样；第二种形式让你能够引用接收到的值。
+
+select会等待case中有能够执行的case时去执行。当条件满足时，select才会去通信并执行case之后的语句；这时候其它通信是不会执行的。一个没有任何case的select语句写作select{}，会永远地等待下去。
+
+示例：
+
+```go
+package main
+
+import "time"
+import "fmt"
+
+// Go 的通道选择器 让你可以同时等待多个通道操作。
+// Go 协程和通道以及选择器的结合是 Go 的一个强大特性。
+func main() {
+	// 在我们的例子中，我们将从两个通道中选择。
+	c1 := make(chan string)
+	c2 := make(chan string)
+	// 各个通道将在若干时间后接收一个值，这个用来模拟例如并行的 Go 协程中阻塞的 RPC 操作
+	go func() {
+		time.Sleep(time.Second * 1)
+		c1 <- "one"
+	}()
+	go func() {
+		time.Sleep(time.Second * 2)
+		c2 <- "two"
+	}()
+
+	// 我们使用 select 关键字来同时等待这两个值，并打印各自接收到的值。
+	for i := 0; i < 2; i++ {
+		select {
+		case msg1 := <-c1:
+			fmt.Println("received", msg1)
+		case msg2 := <-c2:
+			fmt.Println("received", msg2)
+		}
+	}
+	// 我们首先接收到值 "one"，然后就是预料中的 "two"了。
+	// 注意从第一次和第二次 Sleeps 并发执行，总共仅运行了两秒左右。
+}
+```
+
+
+
+#### 超时实现
+
+```go
+package main
+
+import "time"
+import "fmt"
+
+// 超时 对于一个连接外部资源，或者其它一些需要花费执行时间的操作的程序而言是很重要的。
+// 得益于通道和 select，在 Go中实现超时操作是简洁而优雅的。
+func main() {
+	c1 := make(chan string, 1)
+	// 在我们的例子中，假如我们执行一个外部调用，并在 2 秒后通过通道 c1 返回它的执行结果。
+	go func() {
+		time.Sleep(time.Second * 2)
+		c1 <- "result 1"
+	}()
+
+	// 这里是使用 select 实现一个超时操作。res := <- c1 等待结果，<-Time.After 等待超时时间 1 秒后发送的值。
+	// 由于 select 默认处理第一个已准备好的接收操作，如果这个操作超过了允许的 1 秒的话，将会执行超时 case。
+	select {
+	case res := <-c1:
+		fmt.Println(res)
+	case <-time.After(time.Second * 1):
+		fmt.Println("timeout 1")
+	}
+
+	// 如果我允许一个长一点的超时时间 3 秒，将会成功的从 c2接收到值，并且打印出结果。
+	c2 := make(chan string, 1)
+	go func() {
+		time.Sleep(time.Second * 2)
+		c2 <- "result 2"
+	}()
+
+	select {
+	case res := <-c2:
+		fmt.Println(res)
+	case <-time.After(time.Second * 3):
+		fmt.Println("timeout 2")
+	}
+	// 运行这个程序，首先显示运行超时的操作，然后是成功接收的。
+	// 使用这个 select 超时方式，需要使用通道传递结果。
+	// 这对于一般情况是个好的方式，因为其他重要的 Go 特性是基于通道和select 的。
+}
+```
+
+
+
+#### 非阻塞选择器
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// 常规的通过通道发送和接收数据是阻塞的。
+// 然而，我们可以使用带一个 default 子句的 select 来实现非阻塞 的发送、接收，甚至是非阻塞的多路 select。
+func main() {
+	messages := make(chan string)
+	signals := make(chan bool)
+	// 这里是一个非阻塞接收的例子。
+	// 如果在 messages 中存在，然后 select 将这个值带入 <-messages case中。
+	// 如果不是，就直接到 default 分支中。
+	select {
+	case msg := <-messages:
+		fmt.Println("received message", msg)
+	default:
+		fmt.Println("no message received")
+	}
+
+	// 一个非阻塞发送的实现方法和上面一样。
+	msg := "hi"
+	select {
+	case messages <- msg:
+		fmt.Println("sent message", msg)
+	default:
+		fmt.Println("no message sent")
+	}
+
+	// 我们可以在 default 前使用多个 case 子句来实现一个多路的非阻塞的选择器。
+	// 这里我们试图在 messages和 signals 上同时使用非阻塞的接受操作。
+	select {
+	case msg := <-messages:
+		fmt.Println("received message", msg)
+	case sig := <-signals:
+		fmt.Println("received signal", sig)
+	default:
+		fmt.Println("no activity")
+	}
+}
+```
+
