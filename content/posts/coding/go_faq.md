@@ -870,36 +870,129 @@ func main() {
 
 #### 同步实现
 
-我们可以通过channel实现同步，如下：
+我们可以通过channel实现同步，典型的生产者消费者模式，例子：
 
 ##### 方案1
 
 ```go
 package main
 
-import "fmt"
-import "time"
+import (
+    "fmt"
+    "time"
+)
 
-// 我们可以使用通道来同步 Go 协程间的执行状态。
-// 这里是一个使用阻塞的接受方式来等待一个 Go 协程的运行结束。
-func worker(done chan bool) {
-	// 这是一个我们将要在 Go 协程中运行的函数。
-	// done 通道将被用于通知其他 Go 协程这个函数已经工作完毕。
-	fmt.Print("working...")
-	time.Sleep(time.Second)
-	fmt.Println("done")
-	// 发送一个值来通知我们已经完工啦。
-	done <- true
+func producer(ch chan int, count int) {
+    for i := 1; i <= count; i++ {
+        fmt.Println("大妈做第", i, "个面包")
+        ch <- i
+        
+        // 睡眠一下，可以让整个生产消费看得更清晰点
+        time.Sleep(time.Second * time.Duration(1))
+    }
 }
+
+func consumer(ch chan int, count int) {
+    for v := range ch {
+        fmt.Println("大叔吃了第", v, "个面包")
+        count--
+        if count == 0 {
+            fmt.Println("没面包了，大叔也饱了")
+            close(ch)
+        }
+    }
+}
+
 func main() {
-	// 运行一个 worker Go协程，并给予用于通知的通道。
-	done := make(chan bool, 1)
-	go worker(done)
-	// 程序将在接收到通道中 worker 发出的通知前一直阻塞。
-	<-done
-	// 如果你把 <- done 这行代码从程序中移除，程序甚至会在 worker还没开始运行时就结束了。
+    ch := make(chan int)
+    count := 5
+    go producer(ch, count)
+    consumer(ch, count)
 }
+
 ```
+
+上面代码中，我们另外起了个 goroutine 让大妈来生产5个面包（实际就是往channel中写数据），主 goroutine 让大叔不断吃面包（从channel中读数据）。我们来看一下输出结果：
+
+```text
+大妈做第 1 个面包
+大叔吃了第 1 个面包
+大妈做第 2 个面包
+大叔吃了第 2 个面包
+大妈做第 3 个面包
+大叔吃了第 3 个面包
+大妈做第 4 个面包
+大叔吃了第 4 个面包
+大妈做第 5 个面包
+大叔吃了第 5 个面包
+没面包了，大叔也饱了
+```
+
+上面代码，我们用 for-range 来读取 channel的数据，for-range 是一个很有特色的语句，有以下特点：
+
+- 如果 channel 已经被关闭，它还是会继续执行，直到所有值被取完，然后退出执行
+- 如果通道没有关闭，但是channel没有可读取的数据，它则会阻塞在 range 这句位置，直到被唤醒。
+- 如果 channel 是 nil，那么同样符合我们上面说的的原则，读取会被阻塞，也就是会一直阻塞在 range 位置。
+
+我们来验证一下，我们把上面代码中的 *close(ch)* 移到主协程中试试：
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func producer(ch chan int, count int) {
+    for i := 1; i <= count; i++ {
+        fmt.Println("大妈做第", i, "个面包")
+        ch <- i
+        
+        // 睡眠一下，可以让整个生产消费看得更清晰点
+        time.Sleep(time.Second * time.Duration(1))
+    }
+}
+
+func consumer(ch chan int, count int) {
+    for v := range ch {
+        fmt.Println("大叔吃了第", v, "个面包")
+        count--
+        if count == 0 {
+            fmt.Println("没面包了，大叔也饱了")
+        }
+    }
+}
+
+func main() {
+    ch := make(chan int)
+    count := 5
+    go producer(ch, count)
+    consumer(ch, count)
+    close(ch)
+}
+
+```
+
+打印输出：
+
+```text
+大妈做第 1 个面包
+大叔吃了第 1 个面包
+大妈做第 2 个面包
+大叔吃了第 2 个面包
+大妈做第 3 个面包
+大叔吃了第 3 个面包
+大妈做第 4 个面包
+大叔吃了第 4 个面包
+大妈做第 5 个面包
+大叔吃了第 5 个面包
+没面包了，大叔也饱了
+fatal error: all goroutines are asleep - deadlock!
+
+```
+
+果然阻塞掉了，最终形成了死锁，抛出异常了。
 
 
 
