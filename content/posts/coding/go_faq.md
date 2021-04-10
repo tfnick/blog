@@ -520,9 +520,11 @@ func main() {
 
 ```go
 
-package main
+package main如果没有 default 子句，select 将阻塞，直到某个通信可以运行；Go 不会重新对 channel 或值进行求值。
 
-import "fmt"
+
+import "fmt"如果没有 default 子句，select 将阻塞，直到某个通信可以运行；Go 不会重新对 channel 或值进行求值。
+
 
 var v1 interface{} = 1     // 将int类型赋值给interface{}
 var v2 interface{} = "abc" // 将string类型赋值给interface{}
@@ -1118,6 +1120,23 @@ default:
 select语句的一般形式。和switch语句稍微有点相似，也会有几个case和最后的default选择支。每一个case代表一个通信操作(在某个channel上进行发送或者接收)并且会包含一些语句组成的一个语句块。一个接收表达式可能只包含接收表达式自身(译注：不把接收到的值赋值给变量什么的)，就像上面的第一个case，或者包含在一个简短的变量声明中，像第二个case里一样；第二种形式让你能够引用接收到的值。
 
 select会等待case中有能够执行的case时去执行。当条件满足时，select才会去通信并执行case之后的语句；这时候其它通信是不会执行的。一个没有任何case的select语句写作select{}，会永远地等待下去。
+
+总结：
+
+- 每个 case 都必须是一个通信
+
+- 所有 channel 表达式都会被求值
+
+- 所有被发送的表达式都会被求值
+
+- 如果任意某个通信可以进行，它就执行，其他被忽略。
+
+- 如果有多个 case 都可以运行，Select 会随机公平地选出一个执行。其他不会执行。
+
+  否则：
+
+  1. 如果有 default 子句，则执行该语句。
+  2. 如果没有 default 子句，select 将`阻塞`，直到某个通信可以运行；Go 不会重新对 channel 或值进行求值。
 
 示例：
 
