@@ -1,0 +1,24 @@
+# set `baseurl` to your root domain
+# if you set it to "/" share icons won't work properly on production
+baseurl = "https://flynx.dev/"  # Include trailing slash
+# title = "去伪存真，化繁为简"  # Edit directly from config/_default/languages.toml # alternatively, uncomment this and remove `title` entry from the aforemention file.
+copyright = "Copyright © 2008–2035, Steve Francia and the 飞天; all rights reserved."
+# canonifyurls = true
+paginate = 10
+theme = "hugo-clarity"
+disqusShortname = ""
+
+DefaultContentLanguage = "en"
+# [languages]
+# config/_default/languages.toml
+
+# [menus]
+#  config/_default/menus/menu.en.toml
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
