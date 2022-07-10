@@ -35,9 +35,4 @@ Gridea：<https://gridea.dev/>
 - 云存储管理客户端 「qiniuClient」: <https://github.com/willnewii/qiniuClient>
 - Chrome 新标签扩展「几枝」、HTML5视频速度控制「Video Speed Controller」、沉浸式阅读「简悦」
 
-### 欢迎打赏
 
-<figure>
-    <img src="https://cdn.jsdelivr.net/gh/tfnick/blog/static/images/wx.jpeg" alt="微信打赏" />
-    <figcaption>微信打赏</figcaption>
-</figure>

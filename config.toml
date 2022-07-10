@@ -7,7 +7,7 @@ languageCode = "en"
 languageCode = "zh-cn"
 # DefaultContentLanguage = "zh-cn"
 title  =  "飞天"
-subtitle = "设计之妙，存乎一心；去伪存精，化繁为简"
+subtitle = "去伪存精，化繁为简"
 
 theme  =  "hello-friend"
 summaryLength = 140
@@ -62,7 +62,7 @@ rssLimit = 5
   DateFormatSingle = "2006-01-02 15:04:05"
   ReadMore = "阅读全文"
 
-  EditPath = 'https://github.com/lmm214/immmmm/edit/master/content'
+  EditPath = 'https://github.com/tfnick/blog/edit/master/content'
 
 [markup]
 [markup.goldmark]
