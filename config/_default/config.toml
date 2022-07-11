@@ -8,6 +8,8 @@ paginate = 10
 theme = "hugo-clarity"
 disqusShortname = ""
 
+timeout = "60s"
+
 DefaultContentLanguage = "en"
 # [languages]
 # config/_default/languages.toml
