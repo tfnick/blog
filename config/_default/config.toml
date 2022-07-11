@@ -8,7 +8,7 @@ paginate = 10
 theme = "hugo-clarity"
 disqusShortname = ""
 
-timeout = "60s"
+timeout = "120s"
 
 DefaultContentLanguage = "en"
 # [languages]
