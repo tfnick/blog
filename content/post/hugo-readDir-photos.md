@@ -7,7 +7,6 @@ author = "飞天"
 toc = true
 +++
 
-效果见： <https://immmmm.com/photos/>
 
 总有那么一瞬间特别特别想发一张照片，但不是以文章形式发布。
 
@@ -49,7 +48,7 @@ layout: "photos"
 <div class="page-photos">
   {{ range (readDir "./static/photos") }}
   <figure>
-    <img src="https://cdn.jsdelivr.net/gh/lmm214/immmmm@gh-pages/photos/{{ .Name }}" alt="{{ .Name }}" />
+    <img src="https://cdn.jsdelivr.net/gh/tfnick/blog@gh-pages/photos/{{ .Name }}" alt="{{ .Name }}" />
     <figcaption>{{ .Name | replaceRE "(.*)[.].*" "$1"}}</figcaption>
   </figure>
   {{ end }}

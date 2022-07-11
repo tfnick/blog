@@ -10,7 +10,6 @@ toc = true
 
 之前 WordPress 推出不同文章样式，如轻博客一样，发一句话、链接或视频有不同的显示效果。之后，用 Hexo、Bitcron 时都以文件夹形式进行文章分类，并以此为判断条件。
 
-效果见：<https://immmmm.com/posts/chat/>
 
 ```
 content

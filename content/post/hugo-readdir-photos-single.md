@@ -24,12 +24,12 @@ toc = true
 
 这功能其实之前 Bitcron 的主题里就有，太符合老年人的需求了，一句话，一堆图片，一篇文章搞定！
 
-当然，如果使用 Github 托管，随手羊毛撸起，`lmm214/immmmm@gh-pages` 需自行更改：
+当然，如果使用 Github 托管，随手羊毛撸起，`tfnick/blog@gh-pages` 需自行更改：
 
 ```
 {{ if .Params.path }}
     {{$Path := .Params.path}}
-    {{- range (readDir (printf "%s%s" "./static/images/" $Path )) -}}<img loading='lazy' src="{{(printf "https://cdn.jsdelivr.net/gh/lmm214/immmmm@gh-pages/images/%s/%s" $Path .Name ) | absURL}}" />{{- end -}}
+    {{- range (readDir (printf "%s%s" "./static/images/" $Path )) -}}<img loading='lazy' src="{{(printf "https://cdn.jsdelivr.net/gh/tfnick/blog@gh-pages/images/%s/%s" $Path .Name ) | absURL}}" />{{- end -}}
 {{ end }}
 ```
 

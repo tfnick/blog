@@ -8,11 +8,10 @@ toc = true
 +++
 
 
-目前发文是直接在 Github 前端进行，Hugo 的构建交给 [Github Actions](https://immmmm.com/hugo-github-actions/) 实现自动化部署。因此，产生个需求，文章里改个错别字什么的，能不能一键直达 GIthub 编辑页面？
+目前发文是直接在 Github 前端进行，Hugo 的构建交给 Github Actions 实现自动化部署。因此，产生个需求，文章里改个错别字什么的，能不能一键直达 GIthub 编辑页面？
 
 ```html
-# 当面页面链接
-https://immmmm.com/hugo-themes/
+
 # Github 编辑页面链接
 https://github.com/tfnick/blog/edit/master/content/posts/coding/hugo-themes.md
 ```

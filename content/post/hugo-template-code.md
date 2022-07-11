@@ -31,8 +31,8 @@ toc = true
 
 `config.toml`配置示例：
 ```
-baseURL  =  "https://immmmm.com"
-title  =  "木木木木木"
+baseURL  =  "https://flynx.dev"
+title  =  "飞天"
 [params]
 	description = "不问明天，悠然浪费"
 	keywords = "博客、主题、折腾、生活"
