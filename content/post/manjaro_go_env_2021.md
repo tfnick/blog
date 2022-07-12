@@ -1,5 +1,5 @@
 +++
-title = "微服manjaro go环境搭建务分层模型"
+title = "manjaro go环境搭建"
 description = "manjaro go环境搭建"
 date = "2021-03-23"
 aliases = ["折腾"]
