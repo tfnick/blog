@@ -32,3 +32,7 @@ how-to-use-hugo-bundle
 ### 不带图，参考
 
 go_faq.md
+
+### 文章位置
+
+发到content/post下面即可
