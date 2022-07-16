@@ -36,10 +36,10 @@
   {{- $scratch.Add "classes" " image_internal" -}}
   {{ $file = (path.Clean $file) }}
   {{- if eq $bundle true -}}
-    {{ $image = .Page.Resources.GetMatch $file }}
+    {{ $image = .Page.Resources.GetMatch $file}}
     {{- if and (not $image) .Page.File -}}
-      {{ $file = path.Join site.Params.CDN.Host (path.Join .Page.RelPermalink $file) }}
-      {{ $image = path.Join site.Params.CDN.Host resources.Get $file }}
+      {{ $file = path.Join .Page.RelPermalink $file }}
+      {{ $image = resources.Get $file }}
     {{- end -}}
   {{- end -}}
 {{- end -}}

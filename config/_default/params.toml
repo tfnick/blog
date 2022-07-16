@@ -140,7 +140,3 @@ websiteDomain = "flynx.dev" # Set the domain name of your website, in most cases
 matomoDomain = "matomo.example.com" # Set to Matomo domain
 matomoSiteID = "1" # Default is set to 1, change this to the siteid being tracked
 
-
-[params.CDN]
-# Host with content/post/xxx.png as final image src
-Host = "https://cdn.jsdelivr.net/gh/tfnick/blog"
