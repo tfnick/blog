@@ -142,6 +142,5 @@ matomoSiteID = "1" # Default is set to 1, change this to the siteid being tracke
 
 
 [params.CDN]
-enable = true
 # Host with content/post/xxx.png as final image src
 Host = "https://cdn.jsdelivr.net/gh/tfnick/blog"
