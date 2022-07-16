@@ -35,4 +35,4 @@ go_faq.md
 
 ### 文章位置
 
-发到content/post下面即可
+放到content/post下面即可，需要下载到本地哦
