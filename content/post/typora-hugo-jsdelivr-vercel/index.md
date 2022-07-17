@@ -8,10 +8,6 @@ usePageBundles: true
 toc: true
 ---
 
-## 
-
-
-
 ## 使用hugo+github+jsdelivr+typora+vercel打造静态博客的步骤与关键
 
 
@@ -19,8 +15,6 @@ toc: true
 ### 步骤说明
 
 此文的阅读对象主要是有开发背景的同学，内容是讲述静态博客的打造思路。
-
-
 
 - Typora - markdown格式博文的写作工具，方便我们日常编写博客文章。
 - Github - markdown格式博客文章 + image文件的仓库，主要用来存储编写的博客，通常需要配合git版本控制工具使用。
@@ -40,15 +34,15 @@ toc: true
 
 #### *图片备份与稳定加速*
 
-静态网站的痛点是图片的托管，要兼顾稳定性与备份的需要。出于备份的需要，我们 要求图片必须保存在github中；稳定性呢，则要么使用付费的第三方图片存储与加速服务（比如阿里云，七牛云），要么使用免费但稳定的jsdelivr图片加速服务，它可以与gi thub代码库无缝集成，任何代码库中的图片，均可以使用如下格式直接进行加速访问：
+静态网站的痛点是图片的托管，要兼顾稳定性与备份的需要。出于备份的需要，我们 要求图片必须保存在github中；稳定性呢，则要么使用付费的第三方图片存储与加速服务（比如阿里云，七牛云），要么使用免费但稳定的jsdelivr图片加速服务，它可以与github代码库无缝集成，任何代码库中的图片，均可以使用如下格式直接进行加速访问：
 
 ```html
 https://cdn.jsdelivr.net/gh/{GITHUB用户名}/{GITHUB代码库名}/图片在仓库中的相对路径.图片后缀
 ```
 
-而hugo正好有一项pageBundles功能，其核心是将一篇文章的markdown文件与图片组织在一个目录下，其中目录名编译后对应文章名，markdown文件名则同意为index.md。比如我的一篇文章：
+而hugo正好有一项pageBundles功能，其核心是将每一篇文章的markdown文件与图片组织在一个目录下，其中目录名编译后对应文章名，markdown文件名则统一为index.md。比如我的两篇文章组织形式如下：
 
-![image-20220717235148819](image-20220717235148819.png)
+![image-20220718002801597](image-20220718002801597.png)
 
 
 
@@ -57,6 +51,20 @@ https://cdn.jsdelivr.net/gh/{GITHUB用户名}/{GITHUB代码库名}/图片在仓�
 - 文章组织形式按上面图片类似的格式进行 组织。
 
 - 每篇博文中（index.md）指定：`usePageBundles: true`
+
+  ```html
+  ---
+  title: '使用hugo+jsdelivr+typora+vercel打造静态博客的步骤'
+  description: '使用hugo+jsdelivr+typora+vercel打造静态博客的步骤'
+  summary: "使用hugo+jsdelivr+typora+vercel打造静态博客的步骤"
+  date: '2022-07-17'
+  author: '飞天'
+  usePageBundles: true
+  toc: true
+  ---
+  ```
+
+  
 
 - 主题中负责图片渲染src的地方稍做修改：
 
