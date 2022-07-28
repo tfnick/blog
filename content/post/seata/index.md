@@ -1,3 +1,4 @@
+---
 title: '一文看懂seata分布式事务框架'
 description: '一文看懂seata分布式事务框架'
 summary: "一文看懂seata分布式事务框架"
@@ -5,6 +6,7 @@ date: '2022-07-28'
 author: '飞天'
 usePageBundles: true
 toc: true
+---
 
 ## Seata是什么
 
