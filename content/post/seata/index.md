@@ -1,7 +1,7 @@
 ---
 title: '一文看懂seata分布式事务框架'
 description: '一文看懂seata分布式事务框架'
-summary: "一文看懂seata分布式事务框架"
+summary: "Seata是一款开源的分布式事务解决方案（事务协调框架），致力于在微服务架构下提供高性能和简单易用的分布式事务服务"
 date: '2022-07-28'
 author: '飞天'
 usePageBundles: true
