@@ -1,12 +1,14 @@
-+++
-title = "Deep customization hunting camera factory from China"
-description = "Deep customization hunting camera factory from China"
-date = "2023-05-12"
-aliases = ["折腾"]
-author = "飞天"
-toc = true
+---
+title: 'Deep customization hunting camera factory from China'
+description: 'Deep customization hunting camera factory from China'
+summary: "Deep customization hunting camera supplier"
+date: '2023-05-14'
+author: '飞天'
+usePageBundles: true
+toc: true
+---
 
-+++
+
 
 I have always wanted to be my own boss, so I recently contacted a hunting camera manufacturer to record their product advantages.
 
