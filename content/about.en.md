@@ -21,7 +21,7 @@ author = "飞天"
 ### 维护项目
 
 - 友情支持博客：<https://shuntudiping.com/>
-- [Hunting Camera Manufacturer's site](https://www.huntingcamerafactory.com/)
+- [Hunting Camera Manufacturer](https://www.huntingcamerafactory.com/)
 
 ### 工具推荐
 
