@@ -25,14 +25,10 @@ hugo server -t YOURTHEME
 
 ## 文章发布
 
-### 带图文，参考
+1，在post目录下创建目录xxx
 
-how-to-use-hugo-bundle
+2，在xxx目录下创建index.md
 
-### 不带图，参考
+3，复制外部文章或者内部文章到index.md，图片会被typora自动复制到 xxx目录下
 
-go_faq.md
-
-### 文章位置
-
-放到content/post下面即可，需要下载到本地哦
+4，git add && git commit -m "deploy" && git push
