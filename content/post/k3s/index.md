@@ -81,6 +81,8 @@ $ sudo cat /var/lib/rancher/k3s/server/node-token
 K108b6e09e0309379530a839b05d293a38ec52e0f2535821ed7cb9dcb4a1f6a8c70::server:3d60c753f8a85e07f8d8484ecb0e96ab
 ```
 
+
+
 #### work01.dev
 
 安装集群work01节点，并加入主节点所在集群，请按需填写你自己的K3S_NODE_NAME、K3S_URL、K3S_TOKEN：
@@ -132,6 +134,8 @@ $ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.22.17+k3s1 K3S_NODE_NAME
 Created symlink /etc/systemd/system/multi-user.target.wants/k3s-agent.service → /etc/systemd/system/k3s-agent.service.
 [INFO]  systemd: Starting k3s-agent
 ```
+
+
 
 #### 检查K3s集群状态
 
@@ -198,6 +202,8 @@ Rancher可以进行多集群管理，如果你有其他的集群，也可以按�
 本次安装Rancher是单节点安装，如果您是用于生产环境，需要安装Rancher集群，可以参考官网。
 
 ## 卸载K3s集群
+
+可以按如下方式卸载集群节点
 
 - 卸载server01.dev
 
