@@ -39,6 +39,8 @@ toc : true
 
 ## 第一步：搭建K3s集群
 
+
+
 #### server01.dev
 
 登陆server01.dev节点，安装Master并启动，注意：这里我们需要安装指定版本的K3S: v1.22.17+k3s1
