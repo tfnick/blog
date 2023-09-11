@@ -179,8 +179,6 @@ $ sudo docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 r
 
 ![import command](import-cluster.jpeg)
 
-
-
 登陆节点**server01.dev**，粘贴复制的shell命令并执行：
 
 ```shell
