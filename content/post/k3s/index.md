@@ -161,7 +161,7 @@ work02.dev     Ready    <none>                 67m   v1.22.17+k3s1
 $ sudo docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:v2.6.13-rc1
 ```
 
-访问 https://<RANCHER IP>即https://192.168.10.203 按提示修改管理员密码即完成Rancher的安装
+访问 https://{RANCHER IP} 即 https://192.168.10.203 按提示修改管理员密码即完成Rancher的安装
 
 ## 第三步：在Rancher中导入第一步搭建的K3s集群
 
