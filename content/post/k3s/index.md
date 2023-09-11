@@ -1,7 +1,7 @@
 ---
 title : "无废话rancher + k3s部署"
 description : "使用rancher管理k3s集群"
-date : "2023-09-11"
+date : "2023-09-01"
 aliases : ["折腾"]
 author : "飞天"
 toc : true
