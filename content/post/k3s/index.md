@@ -18,6 +18,8 @@ toc : true
 
 <img src="a.jpg" alt="img" style="zoom:50%;" />
 
+
+
 - 部署节点说明 
 
   | 节点   | Hostname       | 职责                | 操作系统               | IP               |
@@ -27,7 +29,10 @@ toc : true
   | Work   | `work01.dev`   | 安装K3s的Worker节点 | Debian11 / ubuntu22.04 | `192.168.10.205` |
   | Work   | `work02.dev`   | 安装K3s的Worker节点 | Debian11 / ubuntu22.04 | `192.168.10.206` |
 
-  
+
+
+
+
 
 ## 前置条件
 
