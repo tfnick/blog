@@ -18,12 +18,7 @@ toc : true
 
 <img src="a.jpg" alt="img" style="zoom:50%;" />
 
-| 节点   | Hostname       |        职责         | 操作系统               | IP               |
-| ------ | -------------- | :-----------------: | ---------------------- | ---------------- |
-| GUI    | `rancher`      |     安装Rancher     | Debian11 / ubuntu22.04 | `192.168.10.203` |
-| Master | `server01.dev` | 安装K3s的Master节点 | Debian11 / ubuntu22.04 | `192.168.10.204` |
-| Work   | `work01.dev`   | 安装K3s的Worker节点 | Debian11 / ubuntu22.04 | `192.168.10.205` |
-| Work   | `work02.dev`   | 安装K3s的Worker节点 | Debian11 / ubuntu22.04 | `192.168.10.206` |
+![deploy_nodes](table.jpeg)
 
 
 
