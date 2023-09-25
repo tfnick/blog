@@ -10,7 +10,7 @@ toc: true
 
 
 
-I have always wanted to be my own boss, so I recently contacted a hunting camera manufacturer to record their product advantages.
+I recently contacted a hunting camera manufacturer to record their product advantages.
 
 --------------------------as bellow-----------------------------
 
