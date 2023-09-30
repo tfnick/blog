@@ -413,3 +413,9 @@ $ curl --insecure -fL https://192.168.10.203/system-agent-install.sh | sudo  sh 
 ### 打通gitea+drone+nexus+rancher
 
 #### 待续
+
+
+
+### 参考
+
+ [rancher + drone ci/cd](https://juejin.cn/post/7129066031875620894)
