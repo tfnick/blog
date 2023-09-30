@@ -130,7 +130,7 @@ $ sudo scp ~/ssl-sans/*.crt mac@192.168.10.206:/tmp
 在所有节点（cicd-node,rancher,server01,worker01,worker02）中分别执行如下命令：
 
 ```shell
-$ apt-get install ca-certificates
+$ sudo apt-get install ca-certificates
 # 移动证书到/usr/share/ca-certificates/local
 $ sudo mkdir -p /usr/share/ca-certificates/local 
 $ sudo mv /tmp/*.crt /usr/share/ca-certificates/local
@@ -140,16 +140,276 @@ $ sudo dpkg-reconfigure ca-certificates
 
 #### 设置cicd-node节点
 
+##### 安装Docker19.03 + Docker-Compose1.25.4
+
+```shell
+$ curl https://releases.rancher.com/install-docker/19.03.sh | sh
+
+$ sudo vi /etc/docker/daemon.json
+{
+  "registry-mirrors": ["http://hub-mirror.c.163.com"],
+  "insecure-registries":["192.168.10.253","nexus.hkyx.com"]
+}
+
+$ sudo systemctl restart docker
+
+$ curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+$ sudo chmod +x /usr/local/bin/docker-compose
+
+$ sudo docker-compose --version
+```
+
+
+
+##### 安装gitea
+
+```shell
+$ mkdir ~/gitea && cd ~/gitea
+$ sudo vi docker-compose.yml
+version: "3"
+ 
+networks:
+  gitea:
+    external: false
+ 
+services:
+  server:
+    image: gitea/gitea:1.16.7
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    networks:
+      - gitea
+    volumes:
+      - /home/data:/data  # /home/data可以替换成你想要的挂载目录
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000" # 3030可以替换成你想要的端口
+      - "2222:22" # 322可以替换成22
+$ sudo docker-compose up -d
+```
+
+
+
+##### 安装drone
+
+```shell
+$ mkdir ~/drone && cd ~/drone
+$ sudo vi docker-compose.yml
+version: '3'
+services:
+  drone-server:
+    restart: always
+    image: drone/drone:2
+    ports:
+      - "1080:80"
+    volumes:
+      - /var/drone:/var/lib/drone/
+      - /var/drone_data:/data/
+    environment:
+      - DRONE_GITEA_SERVER=http://192.168.10.253:3000
+      - DRONE_GITEA_CLIENT_ID=581c2741-a131-40e3-bd16-1197a9a2b06b
+      - DRONE_GITEA_CLIENT_SECRET=6yiusBvtBkIcltm2iIQ4siEgylpp7WN50Ld5pjE0PhE8
+      - DRONE_SERVER_HOST=192.168.10.253:1080
+      - DRONE_SERVER_PROTO=http
+      - DRONE_RPC_SECRET=34e6c77e95ea65ac20d305fad7980b09
+      - DRONE_GIT_ALWAYS_AUTH=true
+      - DRONE_GIT_USERNAME=tfnick
+      - DRONE_GIT_PASSWORD={你的密码}
+      - DRONE_USER_CREATE=username:tfnick,admin:true
+  drone-runner-docker:
+    restart: always
+    image: drone/drone-runner-docker:1
+    ports:
+      - "3001:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_RPC_PROTO=http
+      - DRONE_RPC_HOST=drone-server
+      - DRONE_RPC_SECRET=34e6c77e95ea65ac20d305fad7980b09
+      - DRONE_RUNNER_NAME=drone-runner-docker
+      - DRONE_RUNNER_CAPACITY=2
+      
+$ sudo docker-compose up -d
+```
+
+
+
+##### 安装nexus + nginx
+
+```shell
+$ sudo docker run --restart=always -tid -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 --name nexus -e NEXUS_CONTEXT=nexus -v /var/nexus-data:/nexus-data  docker.io/sonatype/nexus3 
+
+$ sudo mkdir -p /var/docker-nginx/nginx && sudo mkdir -p /var/docker-nginx/logs
+
+# 复制证书到宿主机的/var/docker-nginx/nginx/
+$ sudo cp -r ~/ssl-sans/ /var/docker-nginx/nginx/
+
+$ sudo docker run -p 80:80 --name nginx --restart=always -v /var/docker-nginx/nginx:/etc/nginx -v /var/docker-nginx/logs:/var/log/nginx -d nginx
+
+# 配置/var/docker-nginx/nginx/conf.d/default.conf
+$ sudo vi /var/docker-nginx/nginx/conf.d/default.conf
+upstream nexus_website {
+    server 192.168.10.253:8081;
+}
+upstream nexus_docker_hosted {
+    server 192.168.10.253:8082;
+}
+upstream nexus_docker_group {
+    server 192.168.10.253:8084;
+}
+
+server {
+    listen 80;
+    
+    # nexus对外的域名 
+    server_name nexus.hkyx.com;
+
+    #https配置开始
+    listen       443 ssl;
+    #这里是nginx的证书配置
+    ssl_certificate      /etc/nginx/ssl-sans/nexus.hkyx.com.crt;
+    ssl_certificate_key  /etc/nginx/ssl-sans/nexus.hkyx.com.key;
+
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+    #https配置结束
+
+    access_log /var/log/nginx/nexus.hkyx.com.log main;
+        
+    # disable any limits to avoid HTTP 413 for large image uploads
+    client_max_body_size 0;
+    # required to avoid HTTP 411: 
+    chunked_transfer_encoding on;
+    # 设置默认使用推送代理
+    set $upstream "nexus_docker_hosted";
+    # 当请求是GET，也就是拉取镜像的时候，这里改为拉取代理，如此便解决了拉取和推送的端口统一
+    if ( $request_method ~* 'GET') {
+        set $upstream "nexus_docker_group";
+    }
+    # 只有本地仓库才支持搜索，所以将搜索请求转发到本地仓库，否则出现500报错
+    if ($request_uri ~ '/search') {
+        set $upstream "nexus_docker_hosted"; 
+    }  
+    index index.html index.htm index.php;
+    location / {
+            proxy_pass http://$upstream;
+            proxy_set_header Host $host;
+            proxy_connect_timeout 3600;
+            proxy_send_timeout 3600;
+            proxy_read_timeout 3600;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_buffering off;
+            proxy_request_buffering off;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto http;
+    }
+}
+
+server {
+    listen 80;
+    server_name repo.idukelu.com;
+    access_log /var/log/nginx/nexus-web.log main;
+    index index.html index.htm index.php;
+    location /nexus { 
+            proxy_pass http://nexus_website/nexus;
+            proxy_set_header Host $host;
+            client_max_body_size 512m;
+            proxy_connect_timeout 3600;
+            proxy_send_timeout 3600;
+            proxy_read_timeout 3600;
+            proxy_buffering off;
+            proxy_request_buffering off;
+    }
+}
+```
+
+
+
 #### 设置rancher节点
+
+##### 安装Docker19.03 
+
+```shell
+$ curl https://releases.rancher.com/install-docker/19.03.sh | sh
+
+$ sudo vi /etc/docker/daemon.json
+{
+  "registry-mirrors": ["http://hub-mirror.c.163.com"],
+  "insecure-registries":["192.168.10.253","nexus.hkyx.com"]
+}
+
+$ sudo systemctl restart docker
+```
+
+
+
+##### 安装Rancher2.7.6
+
+```shell
+sudo docker run -d --privileged --restart=unless-stopped -p 80:80 -p 443:443 -v /var/rancher-data:/var/lib/rancher/  -v /usr/share/ca-certificates/local:/container/certs -e SSL_CERT_DIR="/container/certs" --add-host nexus.hkyx.com:192.168.10.253 --add-host nexus-web.hkyx.com:192.168.10.253 --privileged  rancher/rancher:v2.7.6
+```
+
+##### 配置Rancher2.7.6
+
+- 创建集群k3s-cluster
+
+  - 进入rancher首页，依次点击`创建`-`自定义`，输入集群名称后，点击 `创建`进行保存。
+
+    ![](./create.jpeg)
+
+  - 查看用于注册k3s集群server01节点的命令
+
+    ![](./server01.jpeg)
+
+  - 查看用户注册k3s集群worker01,worker02节点的命令
+
+    ![](./work0102.jpeg)
+
+- 创建集群的secret，后续从nexus拉取镜像会用到
+
+  进入k3s-cluster集群，依次点击`存储`-`Secret`-`创建`-`镜像仓库`，填入`nexus registry`的地址和`凭证`信息。
+
+  ![](./secret.jpeg)
 
 #### 设置server01节点
 
+注册该节点
+
+```shell
+$ curl --insecure -fL https://192.168.10.203/system-agent-install.sh | sudo  sh -s - --server https://192.168.10.203 --label 'cattle.io/os=linux' --token v98g582t55jm7vld5jc8pdmkw49dpfxwlgk55qqshsgtccwlrpzqkr --ca-checksum b94ba414a26126769787e01286bd861a15f6991c1dc221bbd7e13ab33e5f0cd5 --etcd --controlplane --worker
+```
+
+
+
 #### 设置worker01节点
+
+注册该节点
+
+```shell
+$ curl --insecure -fL https://192.168.10.203/system-agent-install.sh | sudo  sh -s - --server https://192.168.10.203 --label 'cattle.io/os=linux' --token v98g582t55jm7vld5jc8pdmkw49dpfxwlgk55qqshsgtccwlrpzqkr --ca-checksum b94ba414a26126769787e01286bd861a15f6991c1dc221bbd7e13ab33e5f0cd5 --worker
+```
+
+
 
 #### 设置worker02节点
 
+注册该节点
+
+```shell
+$ curl --insecure -fL https://192.168.10.203/system-agent-install.sh | sudo  sh -s - --server https://192.168.10.203 --label 'cattle.io/os=linux' --token v98g582t55jm7vld5jc8pdmkw49dpfxwlgk55qqshsgtccwlrpzqkr --ca-checksum b94ba414a26126769787e01286bd861a15f6991c1dc221bbd7e13ab33e5f0cd5 --worker
+```
 
 
-### CICD案例
 
-#### 部署demo-app
+### 打通gitea+drone+nexus+rancher
+
+#### 待续
