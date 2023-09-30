@@ -20,15 +20,7 @@ toc : true
 
 
 
-| 节点    | Hostname  | 操作系统 | 安装软件     | IP       | 域名        |
-| --- | --- | --- |--- | --- | --- |
-| CI/CD   | cicd-node | Debian10 | **Docker19.03** + Docker-Compose1.25.4<br />Gitea<br />Drone<br />Nexus + Nginx | 192.168.10.253 | nexus.hkyx.com |
-| Rancher | rancher   | Debian10 | **Docker19.03**<br />Rancher 2.7.6  | 192.168.10.203 |                |
-| Master  | server01  | Debian10 | 无  | 192.168.10.204 |            |
-| Worker  | worker01  | Debian10 | 无   | 192.168.10.205 |         |
-| Worker  | worker02  | Debian10 | 无   | 192.168.10.206 |        |
-
-
+![nodes](./5321696063021_.pic.jpg)
 
 ### 搭建环境
 
