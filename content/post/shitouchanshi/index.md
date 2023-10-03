@@ -9,11 +9,13 @@ toc: true
 
 ---
 
-#### 简介
+[TOC]
+
+### 简介
 
 **石头希迁**（700年—790年），俗姓[陈](https://zh.wikipedia.org/wiki/陈姓)，[端州](https://zh.wikipedia.org/wiki/端州)高要（今[广东省](https://zh.wikipedia.org/wiki/廣東省)[肇庆市](https://zh.wikipedia.org/wiki/肇慶市)）人，[唐代](https://zh.wikipedia.org/wiki/唐代)[佛教](https://zh.wikipedia.org/wiki/汉传佛教)[禅宗](https://zh.wikipedia.org/wiki/禅宗)[比丘](https://zh.wikipedia.org/wiki/比丘)、[禅师](https://zh.wikipedia.org/wiki/禪師)，人称**石头和尚**、**石头大师**，[[1\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-青原下-1)[谥号](https://zh.wikipedia.org/wiki/諡號)**无际大师**，[[2\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-石頭禪法-2)法嗣江西[青原行思](https://zh.wikipedia.org/wiki/青原行思)禅师，为[石头宗](https://zh.wikipedia.org/wiki/石頭宗)之开创者。师承[六祖惠能](https://zh.wikipedia.org/zh-hans/%E6%83%A0%E8%83%BD)坐下[青原行思](https://zh.wikipedia.org/zh-hans/%E9%9D%92%E5%8E%9F%E8%A1%8C%E6%80%9D)。
 
-#### 生平
+### 生平
 
 禅师俗姓[陈](https://zh.wikipedia.org/wiki/陈姓)，为[端州](https://zh.wikipedia.org/wiki/端州)高要（今[广东省](https://zh.wikipedia.org/wiki/廣東省)[肇庆市](https://zh.wikipedia.org/wiki/肇慶市)）人，其幼年时即心向[佛学](https://zh.wikipedia.org/wiki/佛学)，有志于[出家](https://zh.wikipedia.org/wiki/出家)，不满乡里宰杀[牺牲](https://zh.wikipedia.org/wiki/牺牲)、祭祀[鬼神](https://zh.wikipedia.org/wiki/鬼神)的风俗，曾数次阻挠。[[2\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-石頭禪法-2)[[3\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-希遷-3)
 
@@ -29,7 +31,7 @@ toc: true
 
 希迁晚年付法给[药山惟俨](https://zh.wikipedia.org/wiki/药山惟俨)。[[3\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-希遷-3)[贞元](https://zh.wikipedia.org/wiki/貞元_(唐朝))六年（790年）十二月二十五日希迁[圆寂](https://zh.wikipedia.org/wiki/圓寂)，世寿九十一，僧腊六十三，肉身不腐，以[全身舍利](https://zh.wikipedia.org/wiki/全身舍利)供奉于楚宁寺。[[2\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-石頭禪法-2)其弟子慧朗、[兴国振朗](https://zh.wikipedia.org/w/index.php?title=興國振朗&action=edit&redlink=1)、波利（或作“尸利”）、[天皇道悟](https://zh.wikipedia.org/wiki/天皇道悟)、道铣、智舟等人共同为其于东岭（南岳南台山跖）建塔。[长庆](https://zh.wikipedia.org/wiki/長慶)元年左右慧朗之徒、[国子](https://zh.wikipedia.org/wiki/國子監)[博士](https://zh.wikipedia.org/wiki/博士_(官職))刘轲与道铣相遇，道铣向刘轲谈论希迁所传之法，刘轲遂为希迁撰碑纪录生平。[[2\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-石頭禪法-2)
 
-#### 肉身佛逸事
+### 肉身佛逸事
 
 [抗日战争](https://zh.wikipedia.org/wiki/中国人民抗日战争)时期，[日本](https://zh.wikipedia.org/wiki/日本)[间谍](https://zh.wikipedia.org/wiki/间谍)渡边四郎（另一种说法是牙医山崎彪）以牙科医生作为掩护，搜罗[中华民国](https://zh.wikipedia.org/wiki/中华民国)的文物，毒死南台寺的和尚，把石头希迁的肉身像偷走，从[福建](https://zh.wikipedia.org/wiki/福建省)[漳州](https://zh.wikipedia.org/wiki/漳州市)经[上海](https://zh.wikipedia.org/wiki/上海市)运抵日本。[[9\]](https://zh.wikipedia.org/zh-hans/石头希迁#cite_note-time-10)
 
@@ -49,7 +51,7 @@ toc: true
 
 石头希迁示寂后，肉身一直供奉在福建漳州，可是，在上个世纪初，却被一群日本人盗走了。日本人盗走了石头希迁的肉身之后，对其十分敬重，一直供奉在横滨的曹洞宗本山总持寺内。近年来，中日双方就石头希迁肉身归还一事，时有商议，但一直没有实质性的进展。
 
-#### 石头路滑
+### 石头路滑
 
 　　石头希迁禅师是江西青原行思禅师的法嗣，唐武则天久视元年生，广东肇庆府高县人，俗姓陈，天生聪颖敏捷。同乡村民畏怕鬼神，常以杀牛斟酒的方式来祭祠鬼神。希迁为了打破村民愚昧迷信的行为，就常将神祠捣毁，并救出将被村民宰杀的牛只。
 
