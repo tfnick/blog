@@ -2,7 +2,7 @@
 title: '憨山大师醒世歌'
 description: '憨山大师醒世歌'
 summary: "憨山大师醒世歌"
-date: '2023-05-14'
+date: '2023-10-03'
 author: '飞天'
 usePageBundles: true
 toc: true
