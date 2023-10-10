@@ -396,9 +396,9 @@ $ sudo docker run -d --privileged --restart=unless-stopped -p 80:80 -p 443:443 -
 
     ![](./work0102.jpeg)
 
-- 创建集群的secret，后续从nexus拉取镜像会用到
+- 创建集群的secret，后续从nexus拉取镜像会用到。（重要）
 
-  进入k3s-cluster集群，依次点击`存储`-`Secret`-`创建`-`镜像仓库`，填入`nexus registry`的地址和`凭证`信息。
+  进入k3s-cluster集群，依次点击`存储`-`Secret`-`创建`-`镜像仓库`，填入`nexus-registry`的地址和`凭证`信息。
 
   ![](./secret.jpeg)
 
