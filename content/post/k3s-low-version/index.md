@@ -238,11 +238,18 @@ services:
 $ sudo docker-compose up -d
 ```
 
+备注：
+
+DRONE_GITEA_CLIENT_ID: gitea中配置oath2的client_id
+
+DRONE_GITEA_CLIENT_SECRET: gitea中配置的oath2的client secret
+
 
 
 ##### 安装nexus + nginx
 
 ```shell
+$ sudo mkdir -p /var/nexus-data && sudo chmod 777 -R /var/nexus-data
 $ sudo docker run --restart=always -tid -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 --name nexus -e NEXUS_CONTEXT=nexus -v /var/nexus-data:/nexus-data  docker.io/sonatype/nexus3 
 
 $ sudo mkdir -p /var/docker-nginx/nginx && sudo mkdir -p /var/docker-nginx/logs
@@ -316,7 +323,7 @@ server {
 
 server {
     listen 80;
-    server_name repo.idukelu.com;
+    server_name nexus-web.hkyx.com;
     access_log /var/log/nginx/nexus-web.log main;
     index index.html index.htm index.php;
     location /nexus { 
@@ -331,6 +338,16 @@ server {
     }
 }
 ```
+
+设置
+
+- 配置tf-docker-hosted仓库，开启http端口8082
+- 配置tf-docker-proxy仓库，开启http端口8083
+  - Remote storage: https://mirror.baidubce.com 
+  - Docker Index: Use Docker Hub
+- 配置tf-docker-group仓库，开启http端口8084
+  - Members: 选中 tf-docker-hosted,tf-docker-proxy
+- Security - Realms，激活Docker Bearer Token Realm，以便后续其他节点可以执行sudo docker login 命令
 
 
 
@@ -355,7 +372,8 @@ $ sudo systemctl restart docker
 ##### 安装Rancher2.7.6
 
 ```shell
-sudo docker run -d --privileged --restart=unless-stopped -p 80:80 -p 443:443 -v /var/rancher-data:/var/lib/rancher/  -v /usr/share/ca-certificates/local:/container/certs -e SSL_CERT_DIR="/container/certs" --add-host nexus.hkyx.com:192.168.10.253 --add-host nexus-web.hkyx.com:192.168.10.253 --privileged  rancher/rancher:v2.7.6
+$ sudo mkdir -p /var/rancher-data
+$ sudo docker run -d --privileged --restart=unless-stopped -p 80:80 -p 443:443 -v /var/rancher-data:/var/lib/rancher/  -v /usr/share/ca-certificates/local:/container/certs -e SSL_CERT_DIR="/container/certs" --add-host nexus.hkyx.com:192.168.10.253 --add-host nexus-web.hkyx.com:192.168.10.253 --privileged  rancher/rancher:v2.7.6
 ```
 
 ##### 配置Rancher2.7.6
