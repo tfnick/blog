@@ -257,7 +257,7 @@ $ sudo mkdir -p /var/docker-nginx/nginx && sudo mkdir -p /var/docker-nginx/logs
 # 复制证书到宿主机的/var/docker-nginx/nginx/
 $ sudo cp -r ~/ssl-sans/ /var/docker-nginx/nginx/
 
-$ sudo docker run -p 80:80 --name nginx --restart=always -v /var/docker-nginx/nginx:/etc/nginx -v /var/docker-nginx/logs:/var/log/nginx -d nginx
+$ sudo docker run -p 80:80 -p 443:443 --name nginx --restart=always -v /var/docker-nginx/nginx:/etc/nginx -v /var/docker-nginx/logs:/var/log/nginx -d nginx
 
 # 配置/var/docker-nginx/nginx/conf.d/default.conf
 $ sudo vi /var/docker-nginx/nginx/conf.d/default.conf
@@ -339,7 +339,7 @@ server {
 }
 ```
 
-设置
+**设置**
 
 - 配置tf-docker-hosted仓库，开启http端口8082
 - 配置tf-docker-proxy仓库，开启http端口8083
@@ -348,6 +348,10 @@ server {
 - 配置tf-docker-group仓库，开启http端口8084
   - Members: 选中 tf-docker-hosted,tf-docker-proxy
 - Security - Realms，激活Docker Bearer Token Realm，以便后续其他节点可以执行sudo docker login 命令
+
+**访问**
+
+https://nexus.hkyx.com
 
 
 
