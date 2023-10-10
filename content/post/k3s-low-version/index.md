@@ -432,6 +432,20 @@ $ curl --insecure -fL https://192.168.10.203/system-agent-install.sh | sudo  sh 
 
 
 
+#### 节点注册问题排查
+
+问题：`error applying plan -- check rancher-system-agent.service logs`
+
+**排查**：`sudo journalctl -eu rancher-system-agent -f`
+
+操作：
+
+- rancher中删除节点
+- 节点上执行卸载agent命令：`curl --insecure -fL https://192.168.10.203/assets/system-agent-uninstall.sh | sudo sh -s -`
+- 重新注册节点
+
+
+
 ### 打通gitea+drone+nexus+rancher
 
 #### 待续
