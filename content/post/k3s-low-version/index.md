@@ -441,7 +441,7 @@ $ curl --insecure -fL https://192.168.10.203/system-agent-install.sh | sudo  sh 
 操作：
 
 - rancher中删除节点
-- 节点上执行卸载agent命令：`curl --insecure -fL https://192.168.10.203/assets/system-agent-uninstall.sh | sudo sh -s -`
+- login as root user, run command: rm -fr /var/lib/rancher/*
 - 重新注册节点
 
 
