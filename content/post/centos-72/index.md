@@ -22,17 +22,29 @@ toc: true
 ### 安装centos7.2
 
 **适用于 x86_64 架构：**
+
 **[CentOS-7-x86_64-DVD-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-DVD-1511.iso)**                       09-Dec-2015 23:15      4G
+
 [CentOS-7-x86_64-DVD-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-DVD-1511.torrent)                   14-Dec-2015 14:00    162K
+
 [CentOS-7-x86_64-Everything-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Everything-1511.iso)                09-Dec-2015 22:39      7G
+
 [CentOS-7-x86_64-Everything-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Everything-1511.torrent)            14-Dec-2015 14:00    290K
+
 [CentOS-7-x86_64-LiveGNOME-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-LiveGNOME-1511.iso)                 10-Dec-2015 12:09      1G
+
 [CentOS-7-x86_64-LiveGNOME-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-LiveGNOME-1511.torrent)             14-Dec-2015 14:00     46K
+
 [CentOS-7-x86_64-LiveKDE-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-LiveKDE-1511.iso)                   10-Dec-2015 12:09      2G
+
 [CentOS-7-x86_64-LiveKDE-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-LiveKDE-1511.torrent)               14-Dec-2015 14:00     67K
+
 [CentOS-7-x86_64-Minimal-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso)                   09-Dec-2015 23:03    603M
+
 [CentOS-7-x86_64-Minimal-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.torrent)               14-Dec-2015 14:00     24K
+
 [CentOS-7-x86_64-NetInstall-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-NetInstall-1511.iso)                09-Dec-2015 22:34    376M
+
 [CentOS-7-x86_64-NetInstall-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-NetInstall-1511.torrent)            14-Dec-2015 14:00     15K
 
 
@@ -58,7 +70,7 @@ NetInstall： # 网络安装镜像，包小，但需联网才能安装。
 
 
 
-### 安装要求
+#### 安装要求
 
 按照部署服务器要求准备好部署环境后，可通过 DataEase 安装脚本快速部署。
 **部署服务器要求：**
@@ -81,7 +93,7 @@ http://服务器 IP 地址：服务运行端口（若没有修改则默认为 81
 使用默认用户名 admin 密码 DataEase@123456 进行登录。
 ```
 
-### 执行安装
+#### 执行安装
 
 ```shell
 # 解压
@@ -92,7 +104,7 @@ cd dataease-offline-installer-v2.2.0
 /bin/bash install.sh
 ```
 
-### 执行卸载
+#### 执行卸载
 
 ```shell
 # 卸载
