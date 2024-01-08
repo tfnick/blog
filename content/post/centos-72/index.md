@@ -2,7 +2,7 @@
 title: 'centos7.2 + dataease安装体验'
 description: 'centos7.2 + dataease安装体验'
 summary: "centos7.2 + dataease安装体验"
-date: '2023-01-08'
+date: '2024-01-08'
 author: '飞天'
 usePageBundles: true
 toc: true
