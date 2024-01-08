@@ -23,7 +23,7 @@ toc: true
 
 **适用于 x86_64 架构：**
 
-**[CentOS-7-x86_64-DVD-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-DVD-1511.iso)**                       09-Dec-2015 23:15      4G
+[CentOS-7-x86_64-DVD-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-DVD-1511.iso)                       09-Dec-2015 23:15      4G
 
 [CentOS-7-x86_64-DVD-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-DVD-1511.torrent)                   14-Dec-2015 14:00    162K
 
@@ -39,7 +39,7 @@ toc: true
 
 [CentOS-7-x86_64-LiveKDE-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-LiveKDE-1511.torrent)               14-Dec-2015 14:00     67K
 
-[CentOS-7-x86_64-Minimal-1511.iso](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso)                   09-Dec-2015 23:03    603M
+[**CentOS-7-x86_64-Minimal-1511.iso**](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso)                   09-Dec-2015 23:03    603M
 
 [CentOS-7-x86_64-Minimal-1511.torrent](https://archive.kernel.org/centos-vault/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.torrent)               14-Dec-2015 14:00     24K
 
@@ -52,8 +52,8 @@ toc: true
 ```
 版本说明：
 
-DVD：        # 标准安装镜像，一般常用。
-Minimal：    # 最小安装镜像，自带的软件最少。
+DVD：        # 标准安装镜像，一般常用。内含桌面，一般可用做客户端
+Minimal：    # 最小安装镜像，自带的软件最少。不含桌面，一般可用做服务器
 Everything： # 标准的基础上集成所有软件，镜像最大。
 NetInstall： # 网络安装镜像，包小，但需联网才能安装。
 ```
