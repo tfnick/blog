@@ -2,7 +2,7 @@
 title: '关于LINUX的一些概念画图总结：UEFI｜BIOS｜MBR｜GRUB｜LVM等等'
 description: '关于LINUX的一些概念画图总结：UEFI｜BIOS｜MBR｜GRUB｜LVM等等'
 summary: "关于LINUX的一些概念画图总结：UEFI｜BIOS｜MBR｜GRUB｜LVM等等"
-date: '2024-02-16'
+date: '2024-02-15'
 author: '飞天'
 usePageBundles: true
 toc: true
