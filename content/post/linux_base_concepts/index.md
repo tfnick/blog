@@ -6,8 +6,6 @@ date: '2024-02-15'
 author: '飞天'
 usePageBundles: true
 toc: true
-
-
 ---
 
 关于LINUX的一些概念画图总结：UEFI｜BIOS｜MBR｜GRUB｜LVM ｜分区｜文件系统 等等，便于随时温习。
