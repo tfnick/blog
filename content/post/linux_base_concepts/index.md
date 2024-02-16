@@ -10,4 +10,4 @@ toc: true
 
 关于LINUX的一些概念画图总结：UEFI｜BIOS｜MBR｜GRUB｜LVM ｜分区｜文件系统 等等，便于随时温习。
 
-![Linux操作系统相关](Linux操作系统相关.jpg)
+![Linux操作系统相关](Linux操作系统相关1.0.1.jpg)
