@@ -12,7 +12,7 @@ toc : true
 最近购买了HP elitedesk 805g8 小主机，且在独立硬盘上先后安装了pop os系统与windows10系统，最终达到的效果是：
 
 - **pop os**作为主系统，默认开机直接进入**pop os**系统
-- 启动主系统过程中，可以连续点击**空格键**进入系统选择界面，可以选择为windows boot manager进入windows10
+- 启动主系统过程中，可以连续点击**空格键**进入系统选择界面，可以选择windows boot manager进入windows10
 - 启动系统过程中，可以连续点击**F10**进入**BIOS**设置
 
 
