@@ -33,7 +33,7 @@ wget http://archive.ubuntukylin.com/software/pool/partner/weixin_2.1.1_amd64.deb
 
 **sudo dpkg -i weixin_2.1.1_amd64.deb**
 
-**sudo dpkg -i ukylin-wxwork_1.0_amd64.deb **
+**sudo dpkg -i ukylin-wxwork_1.0_amd64.deb**
 
 
 
