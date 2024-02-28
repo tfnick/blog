@@ -50,3 +50,10 @@ sudo apt-get --purge remove ukylin-wine:amd64
 1，无法显示应用启动图标
 
 注销并重新登陆
+
+2，如何监控cpu 温度
+
+```
+sudo apt install psensor
+```
+
