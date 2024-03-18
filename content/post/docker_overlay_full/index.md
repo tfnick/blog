@@ -14,6 +14,9 @@ toc : true
 看到占用磁盘空间最大的目录是docker存储根目录下的overlay2目录
 
 ```
+# 可以看到/ver/lib/docker/overlay2占用了100%的磁盘空间
+df -lhT
+
 du -sh  /var/lib/docker/overlay2/*
 ```
 
