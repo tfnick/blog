@@ -1,7 +1,7 @@
 ---
-title: 'Pop!_os22.04上安装微信与企业微信(完美)'
-description: 'Pop!_os22.04上安装微信与企业微信(完美)'
-summary: "Pop!_os22.04上安装微信与企业微信(完美)"
+title: 'Pop!_os22.04上安装微信与企业微信以及其他软件'
+description: 'Pop!_os22.04上安装微信与企业微信以及其他软件'
+summary: "Pop!_os22.04上安装微信与企业微信以及其他软件"
 date: '2024-02-25'
 author: '飞天'
 usePageBundles: true
@@ -45,11 +45,13 @@ sudo apt-get --purge remove ukylin-wxwork
 sudo apt-get --purge remove ukylin-wine:amd64
 ```
 
-###  FAQ
+
+
+###  其他FAQ
 
 1，无法显示应用启动图标
 
-注销并重新登陆
+注销pop!_os并重新登陆
 
 2，如何监控cpu 温度
 
@@ -57,3 +59,17 @@ sudo apt-get --purge remove ukylin-wine:amd64
 sudo apt install psensor
 ```
 
+3，win10与pop!_os 双系统时间同步
+
+```
+# 更新ubuntu的系统时间
+sudo apt-get update
+sudo apt-get install ntpdate
+sudo ntpdate time.windows.com
+# 将时间更新到硬件上
+sudo hwclock --localtime --systohc
+```
+
+4、pop!_os截图软件
+
+推荐：screenshot
