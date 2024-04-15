@@ -1,12 +1,10 @@
 ---
 title : "PVE中虚拟机硬盘在线扩容（LVM格式）- 单硬盘扩容"
 description : "PVE中虚拟机硬盘在线扩容（LVM格式）- 单硬盘扩容"
-date : "2023-10-11"
+date : "2024-04-15"
 aliases : ["折腾"]
 author : "飞天"
 toc : true
-
-
 ---
 
 [TOC]
