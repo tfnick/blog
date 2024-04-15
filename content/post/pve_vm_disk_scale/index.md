@@ -1,6 +1,6 @@
 ---
-title : "PVE中虚拟机硬盘在线扩容（LVM格式）"
-description : "PVE中虚拟机硬盘在线扩容（LVM格式）"
+title : "PVE中虚拟机硬盘在线扩容（LVM格式）- 1"
+description : "PVE中虚拟机硬盘在线扩容（LVM格式）- 1"
 date : "2023-10-11"
 aliases : ["折腾"]
 author : "飞天"
