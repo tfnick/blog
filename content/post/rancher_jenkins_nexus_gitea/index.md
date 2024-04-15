@@ -48,7 +48,7 @@ java -Djava.awt.headless=true -jar /home/mac/jenkins/jenkins.war --webroot=%C/je
 
 ```
 #!/bin/bash
-
+cd /home/mac
 java -Djava.awt.headless=true -jar /home/mac/jenkins/jenkins.war --webroot=%C/jenkins/war --httpPort=3533
 ```
 
@@ -77,6 +77,10 @@ $ sudo systemctl enable jenkins
 $ sudo systemctl start jenkins
 
 ```
+
+
+
+`注意`jenkins升级可能会导致一些plugins执行报错，常见的是ClassNotFound，这个一般可以通过下载缺失的jar，放到%C/jenkins/war/WEB-INF/lib下即可
 
 
 
