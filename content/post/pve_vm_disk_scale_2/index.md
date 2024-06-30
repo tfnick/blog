@@ -25,7 +25,7 @@ toc : true
 
 ## 案例
 
-![整体思路](/home/mac/projects/blog/content/post/pve_vm_disk_scale/LVM.jpg)
+![整体思路](LVM.jpg)
 
 ### 查看现状（/dev/sda）
 
@@ -67,7 +67,7 @@ tmpfs                        2.0G     0  2.0G   0% /sys/fs/cgroup
 
 进入PVE web控制台，增加10G，/dev/sda总容量增加至40G
 
-![lvm_scale](/home/mac/Pictures/lvm_scale.png)
+![lvm_scale](lvm_scale.png)
 
 ```
 $  sudo fdisk -l
