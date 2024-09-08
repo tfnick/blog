@@ -1,6 +1,6 @@
 ---
-title = "从title来的标题"
-description = "描述信息"
+title: "从title来的标题"
+description: "描述信息"
 share: "true"
 toc: "true"
 author: 飞天
