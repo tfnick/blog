@@ -11,4 +11,5 @@ aliases:
 
 # 标题
 
-![9aa378b141d82bc40cd31a849fa6bc46_MD5.jpeg](https://flynx.dev/post/attachments/9aa378b141d82bc40cd31a849fa6bc46_MD5.jpeg)
+![9aa378b141d82bc40cd31a849fa6bc46_MD5.jpeg](/post/attachments/9aa378b141d82bc40cd31a849fa6bc46_MD5.jpeg)
+
