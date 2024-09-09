@@ -78,11 +78,10 @@ Local Images Plus是Obsidian的一款第三方插件，主要实现附件的保�
 `Text replacer` 项具体的配置如下：
 
 - 第1处即替换的具体规则
-- 第2处镜头必须向上，表示`Text replacer`配置的规则优先级低，在其他转换规则执行之后再执行。
+- 第2处箭头必须向上，表示`Text replacer`配置的规则优先级低，在其他转换规则执行之后再执行。
 
-[Open: Pasted image 20240909105729.png](/post/attachments/48160d2c04b82698c0e81683c0583d63_MD5.jpeg)
-![48160d2c04b82698c0e81683c0583d63_MD5.jpeg](/post/attachments/48160d2c04b82698c0e81683c0583d63_MD5.jpeg)
-
+[Open: Pasted image 20240909112846.png](/post/attachments/e7c385796b7dbc52200cbe9996fd0e8c_MD5.jpeg)
+![e7c385796b7dbc52200cbe9996fd0e8c_MD5.jpeg](/post/attachments/e7c385796b7dbc52200cbe9996fd0e8c_MD5.jpeg)
 
 # 发布文章
 
