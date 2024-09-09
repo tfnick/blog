@@ -34,7 +34,7 @@ Obsidian是一款极度自由的本地文章编辑工具，借助其插件系统
 ![42796e80d006645445346ef197b46c83_MD5.jpeg](/post/attachments/42796e80d006645445346ef197b46c83_MD5.jpeg)
 ### Remotely Save  插件配置
 
-Remotely Save是Obsidian的一款第三方插件，主要实现多端笔记同步。这里我们除了需要安装这款插件，还需要有支持Webdav协议的云盘支持，经过对比速度与空间大小等指标，推荐大家使用[infini-cloud](https://infini-cloud.net/)，如本文略有帮助，可填写本人的推荐码：**SLW7Y**
+Remotely Save是Obsidian的一款第三方插件，主要实现多端笔记同步。这里我们除了需要安装这款插件，还需要有支持Webdav协议的云盘支持，经过对比速度与空间大小等指标，推荐大家使用[infini-cloud](https://infini-cloud.net/)，如本文略有帮助，可填写本人的推荐码：**`SLW7Y`**
 
 [Open: Pasted image 20240909103730.png](/post/attachments/992b152554822288e85eb210cd996847_MD5.jpeg)
 ![992b152554822288e85eb210cd996847_MD5.jpeg](/post/attachments/992b152554822288e85eb210cd996847_MD5.jpeg)
