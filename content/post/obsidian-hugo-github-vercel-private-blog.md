@@ -87,11 +87,11 @@ Local Images Plus是Obsidian的一款第三方插件，主要实现附件的保�
 
 ### 发布
 
-- 新建英文博客名，obsidian-hugo-github-vercel-private-blog.md
+- 打开Obsidian，在根目录下新建英文文章名，obsidian-hugo-github-vercel-private-blog
 - 编写文章内容（文档属性需要满足hugo的格式），需要额外添加属性 `share: true`
 [Open: Pasted image 20240909113553.png](/post/attachments/3bb1c36d2ea56fc6655b9ba36eff8fe9_MD5.jpeg)
-![3bb1c36d2ea56fc6655b9ba36eff8fe9_MD5.jpeg](/post/attachments/3bb1c36d2ea56fc6655b9ba36eff8fe9_MD5.jpeg)
-- 调出命令面板，选择 `Enveloppe: Upload all shared notes` 即可实现博客自动发布
+![3bb1c36d2ea56fc6655b9ba36eff8fe9_MD5.jpeg](/post/attachments/3bb1c36d2ea56fc6655b9ba36eff8fe9_MD5.jpeg) 文章涉及图片的话，粘贴的图片附件等会自动保存在attachments目录下。
+- 文章书写完毕，调出Obsidian命令面板，选择 `Enveloppe: Upload all shared notes` 即可实现博客自动发布
 ### 查看
 
 https://flynx.dev/post/obsidian-hugo-github-vercel-private-blog/
