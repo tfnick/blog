@@ -32,5 +32,3 @@ hugo server -t YOURTHEME
 3，复制外部文章或者内部文章到index.md，图片会被typora自动复制到 xxx目录下
 
 4，git add && git commit -m "deploy" && git push
-
-5，github token: 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
